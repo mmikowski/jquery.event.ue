@@ -10,7 +10,7 @@
   <!-- ie9+ rendering support for latest standards -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-  <title>Unified Event plugin test</title>
+  <title>Unified event plugin tests</title>
 <style>
 
   /** The body settings minimize Mac OSX / iOS
@@ -66,7 +66,8 @@
   /** END block dragging */
 
   /* BEGIN divs for Unified Events Binding tests:
-       uzoom      utap      uheld
+       utap      uheld
+       uzoomstart uzoommove uzoomend
        udragstart udragmove udragend
        uheldstart uheldmove uheldend
   */
@@ -195,38 +196,38 @@
 
   /* utap + uheld + udragstart (only) */
   #combo5 {
-    top              : 150px;
-    left             : 450px;
+    top              : 250px;
+    left             : 50px;
   }
 
   /* utap + uheld + udragmove (only)
     no drag event should ever fire
   */
   #combo6 {
-    top              : 150px;
-    left             : 550px;
+    top              : 250px;
+    left             : 150px;
   }
 
   /* utap + uheld + dragend (only)
     no drag event should ever fire
   */
   #combo7 {
-    top              : 150px;
-    left             : 650px;
+    top              : 250px;
+    left             : 250px;
   }
 
   /* utap + uheld + uheldstart (only)
   */
   #combo8 {
-    top              : 150px;
-    left             : 750px;
+    top              : 250px;
+    left             : 350px;
   }
 
   /* utap + uheld + uheldmove (only)
     no uhelddrag events should ever fire
   */
   #combo9 {
-    top              : 250px;
+    top              : 350px;
     left             : 50px;
   }
 
@@ -234,13 +235,13 @@
     no uhelddrag events should ever fire
   */
   #combo10 {
-    top              : 250px;
+    top              : 350px;
     left             : 150px;
   }
 
   /* uheld + uhelddrag all */
   #combo11 {
-    top              : 250px;
+    top              : 350px;
     left             : 250px;
   }
 
@@ -248,7 +249,7 @@
     no uhelddrag events should ever fire
   */
   #combo12 {
-    top              : 250px;
+    top              : 350px;
     left             : 350px;
   }
 
@@ -256,40 +257,38 @@
     no uhelddrag events should ever fire
   */
   #combo13 {
-    top              : 250px;
-    left             : 450px;
+    top              : 450px;
+    left             : 50px;
   }
 
   /* uheld + uheldend (only)
     no uhelddrag events should ever fire
   */
   #combo14 {
-    top              : 250px;
-    left             : 550px;
+    top              : 450px;
+    left             : 150px;
   }
 
   /* udrag + uzoom  */
   #combo15 {
-    top              : 250px;
-    left             : 650px;
+    top              : 450px;
+    left             : 250px;
   }
 
   /* uheld + uzoom  */
   #combo16 {
-    top              : 250px;
-    left             : 750px;
+    top              : 450px;
+    left             : 350px;
   }
 </style>
 
 
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script>
-  <script
-  src="https://raw.github.com/brandonaaron/jquery-mousewheel/master/jquery.mousewheel.js"></script>
-  <script src="jquery.event.ue-0.2.js"></script>
+  <script src="jquery.event.ue.js"></script>
 
   <script>
 
-$(document).ready(function(){
+$(document).ready( function() {
 
   var
     stateMap = {
@@ -298,13 +297,24 @@ $(document).ready(function(){
       px_drag_top  : undefined,
       px_drag_left : undefined
     },
-    onZoom, onTap,      onHeld,
+    onTap,      onHeld,
+    onZoomstart, onZoommove, onZoomend,
     onDragstart, onDragmove, onDragend
     ;
 
-  onZoom = function ( event ){
-    // console.log(event, stateMap.zoom_num);
+  onZoomstart = function ( event ){
+    // console.warn( 'uzoomstart', event );
+    $('#uzoom-report-val').text(String(stateMap.zoom_num));
+  };
+
+  onZoommove = function ( event ){
+    // console.warn( 'uzoommove', event );
     stateMap.zoom_num += event.px_delta_zoom || 0;
+    $('#uzoom-report-val').text(String(stateMap.zoom_num));
+  };
+
+  onZoomend = function ( event ){
+    // console.warn( 'uzoomend', event );
     $('#uzoom-report-val').text(String(stateMap.zoom_num));
   };
 
@@ -371,10 +381,13 @@ $(document).ready(function(){
     stateMap.px_drag_top = stateMap.px_drag_left = undefined;
   };
 
-  $('#uzoom').bind('uzoom',       onZoom  );
-
   $('#utap') .bind('utap.utap',   onTap   );
   $('#uheld').bind('uheld.uheld', onHeld  );
+
+  $('#uzoom')
+     .bind('uzoomstart', onZoomstart )
+     .bind('uzoommove',  onZoommove  )
+     .bind('uzoomend',   onZoomend   )
 
   $('#udrag')
     .bind('udragstart.udrag', onDragstart )
@@ -477,20 +490,6 @@ $(document).ready(function(){
     .bind('uheldend.combo14',   onDragend   )
     ;
 
-  $('#combo15')
-    .bind('udragstart.combo15', onDragstart )
-    .bind('udragmove.combo15',  onDragmove  )
-    .bind('udragend.combo15',   onDragend   )
-    .bind('uzoom.combo15',      onZoom      )
-    ;
-
-  $('#combo16')
-    .bind('uheldstart.combo16', onDragstart )
-    .bind('uheldmove.combo16',  onDragmove  )
-    .bind('uheldend.combo16',   onDragend   )
-    .bind('uzoom.combo16',      onZoom      )
-    ;
-
   $('#uzoom-report-val').text(String(stateMap.zoom_num));
 });
   </script>
@@ -498,7 +497,8 @@ $(document).ready(function(){
 <body>
   <div id="uzoom">zoom area
     <div id="uzoom-report">Zoom:
-    <span id="uzoom-report-val"></span></div>
+      <span id="uzoom-report-val"></span>
+    </div>
     <div id="utap"      class="btn">tap</div>
     <div id="uheld"     class="btn">held</div>
     <div id="udrag"     class="btn">drag</div>
@@ -519,8 +519,6 @@ $(document).ready(function(){
     <div id="combo12"   class="btn">held<br/>+heldstart</div>
     <div id="combo13"   class="btn">held<br/>+heldmove</div>
     <div id="combo14"   class="btn">held<br/>+heldend</div>
-    <div id="combo15"   class="btn">drag<br/>+zoom</div>
-    <div id="combo16"   class="btn">helddrag<br/>+zoom</div>
   </div>
 </body>
 </html>
