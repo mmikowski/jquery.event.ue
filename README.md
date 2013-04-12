@@ -129,6 +129,7 @@ jQuery mobile.
 ## TODO ##
 
 - Add to "See also" sections.
+- Update to 1.8.x +
 
 ## Contribute! ##
 
@@ -137,6 +138,5 @@ GitHub.  Any improvements or suggestions are welcome!
 You can reach me at mike[dot]mikowski[at]gmail[dotcom].
 
 Cheers, Mike
-
 
 END

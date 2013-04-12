@@ -1,0 +1,30 @@
+{ "name"     : "event.ue",
+  "version"  : "0.3.0",
+  "title"    : "Unified mouse and mobile touch input events",
+  "author"   : {
+    "name"  : "Michael S. Mikowski",
+    "email" : "mike.mikowski@gmail.com"
+  },
+  "licenses" : [
+    { "type" : "MIT",
+      "url"  : "https://github.com/jquery/jquery/blob/master/MIT-LICENSE.txt"
+    },
+    { "type" : "GPLv2",
+      "url"  : "http://www.gnu.org/licenses/gpl-2.0.html"
+    }
+  ],
+  "dependencies" : { "jquery" : ">=1.6.2 <1.7.3" },
+
+  "description" : "Use this plugin handle mouse and mobile touch events seamlessly.  Supported motions include tap, long-press, drag, and zoom.  See the README.md on the home page for much greater detail.",
+  "keywords" : [
+    "event", "events", "touch", "mobile", "unified"
+  ],
+  "url"         : "https://github.com/mmikowski/jquery.event.ue",
+  "homepage"    : "https://github.com/mmikowski/jquery.event.ue",
+  "bugs"        : "https://github.com/mmikowski/jquery.event.ue/issues",
+  "maintainers" : [
+    { "name"  : "Michael S. Mikowski",
+      "email" : "mike.mikowski@gmail.com"
+    }
+  ]
+}
