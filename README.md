@@ -12,7 +12,7 @@ and touch devices:
 - long-press drag
 - zoom
 
-Please see the ue-test.html file in this directory which illustrates
+Please see the `ue-test.html` file in this directory which illustrates
 the unified inputs.
 
 ## Release Notes ##
@@ -38,15 +38,38 @@ And yes, fixing that is on my TODO list.
 
 ## Examples ##
 
-See the ue-test.html file to see plenty of examples.
-Examine the HTML source.
+    // bind to a mouse click or tap event
+    $( '#utap' ) .on( 'utap.utap',   onTap   );
+    
+    // bind to a long-press event
+    $( '#uheld' ).on( 'uheld.uheld', onHeld  );
+
+    // bind to zoom events
+    $( '#uzoom' )
+       .bind( 'uzoomstart', onZoomstart )
+       .bind( 'uzoommove',  onZoommove  )
+       .bind( 'uzoomend',   onZoomend   )
+       ;
+
+    // bind to drag events
+    $( '#udrag' )
+      .bind( 'udragstart.udrag', onDragstart )
+      .bind( 'udragmove.udrag',  onDragmove  )
+      .bind( 'udragend.udrag',   onDragend   )
+      ;
+
+    // bind to hold-drag events
+    $('#uhelddrag')
+      .bind('uheldstart.uheldd', onDragstart )
+      .bind('uheldmove.uheldd',  onDragmove  )
+      .bind('uheldend.uheldd',   onDragend   )
+      ;
 
 ## Overview ##
 
-This is not the only unified event handler I have seen recently.
-This was originally written in 2012 and changed occassionaly since.
-Our target touch platforms were iOS5+ (Stock browser) and
-Android 3.2+ (Chrome).
+This was originally written in 2012 and has changed occassionaly since.
+Works with iOS5+ (Stock browser) and Android 3.2+ (Chrome) and of course
+all desktop browsers that I am aware.
 
 The following motions are supported:
 
@@ -56,9 +79,29 @@ The following motions are supported:
 - long-press drag start, move, and end
 - zoom start, zoom move, zoom end
 
-Notice the event object is a little different for these events,
+Notice the event object is a little different,
 so take care, especially with event delegation.  The example
 HTML should help point the way.
+
+
+These are the event object attributes:
+
+- `event.px_start_x` : position for x at start of motion
+- `event.px_start_y' : ibid y
+- `event.px_current_x` : current x position
+- `event.px_current_y` : ibid y
+- `event.px_end_x` : position for x at end of motion
+- `event.px_end_y` : ibid y
+- `event.px_delta_zoom`: the delta in zoom since start of motion
+- `event.px_delta_x` : the delta in x position since start of motion
+- `event.px_delta_y` : ibid y
+- `event.orig_target` : element under cursor at start of motion
+- `event.elem_bound` : element on which event was bound
+- `event.elem_target` : element under the cursor (used for event delegation)
+- `event.timeStamp`
+- `event.ms_elapsed` : elapsed time since start of motion
+- `ms_timestart` : start time of motion
+- `ms_timestop` : stop time of motion
 
 ## Supported events ##
 
