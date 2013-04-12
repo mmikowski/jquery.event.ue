@@ -11,6 +11,7 @@
  *  0.3.0 - Initial jQuery plugin site release
  *        - Replaced scrollwheel zoom with drag motion.
  *          This resolved a conflict with scrollable areas.
+ *  0.3.1 - Change for jQuery plugins site
  *
 */
 

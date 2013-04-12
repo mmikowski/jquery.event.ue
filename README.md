@@ -2,9 +2,9 @@
 
 ## Summary ##
 
-A plugin designed to unify mouse and touch input.
-The following motions are supported for both desktop
-and touch devices:
+Use this jQuery plugin to handle both keyboard-mouse and mobile touch motions with a unified set of events. It is currently being used in a commercial SPA and is featured in the book [Single page web applications - JavaScript end-to-end](http://manning.com/mikowski).
+
+Supported motions for both desktop and touch devices include:
 
 - tap
 - long-press
@@ -12,8 +12,7 @@ and touch devices:
 - long-press drag
 - zoom
 
-Please see the `ue-test.html` file in this directory which illustrates
-the unified inputs.
+Please see the `ue-test.html` file for a demonstration of the different motions.  Most test tiles below the second row are negative test cases and should not be draggable (the one exception is the 'held+helddrag' example). NOTICE: THIS IS NOT YET COMPATIBLE with jQuery 1.8+, but works well with 1.7.2.",
 
 ## Release Notes ##
 
@@ -87,7 +86,7 @@ HTML should help point the way.
 These are the event object attributes:
 
 - `event.px_start_x` : position for x at start of motion
-- `event.px_start_y' : ibid y
+- `event.px_start_y` : ibid y
 - `event.px_current_x` : current x position
 - `event.px_current_y` : ibid y
 - `event.px_end_x` : position for x at end of motion
@@ -107,20 +106,20 @@ These are the event object attributes:
 
 ### utap ###
 A click or a tap event results in a `utap` event.
-- *Desktop* uses a short-press click on the Left Mouse Button [LMB]
-- *Touch* uses a tap on the screen
+- *Desktop* uses a *short-press Left Mouse Button [LMB]* motion.
+- *Touch* uses a *tap* motion.
 
 A click or a tap must be reside within a tolerance radius; 
 otherwise it starts a drag event.  And it must be short in
-duration - otherwise it becomes a long-press event.
+duration - otherwise the motion becomes a `uheld` event.
 
 You may configure the drag radius and the long-press
 durations.
 
 ### uheld ###
 A long-press or long-hold event results in a `uheld` event.
-- *Desktop* uses a long-press Left Mouse Button [LMB]
-- *Touch* uses a long-press on the screen
+- *Desktop* uses a *long-press Left Mouse Button [LMB]* motion.
+- *Touch* uses a *long-touch* motion.
  
 A `uheld` event is distinguished from a `utap` event by the duration
 of the press.  If the press short, the motion is a `utap`
@@ -134,14 +133,14 @@ Dragging events.
 
 There are three events:
 - `udragstart` - fires at the start of a drag (LMB down or finger press where motion has moved out of the drag radius)
-- `udragmove`  - fires each time the mouse or finger
+- `udragmove`  - fires each time the mouse or finger moves
 - `udragend`   - fires at the end of a drag (LMB up or finger release)
 
 
 ### zoom ###
 Zooming events.
-- *Desktop* uses a shift-drag motion.
-- *Touch* uses a pinching motion.
+- *Desktop* uses a *shift-drag* motion.
+- *Touch* uses a *pinching* motion.
 
 A zoom motion, like drag, actually consists of three events:
 
@@ -154,7 +153,7 @@ A zoom motion, like drag, actually consists of three events:
 Like many other plugins, this code does not throw exceptions.
 Instead, it does its work quietly.
 
-## Other notes ##
+## Namespacing! ##
 
 Notice that jQuery event namespacing is fully supported.
 This works:
