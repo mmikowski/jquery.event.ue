@@ -26,14 +26,16 @@ http://jquery.org/license
 ### Version 0.3.1 ###
 This is the first release registered with jQuery plugins.
 
+### Version 0.3.2 ###
+Tested with jQuery 1.7.0 through 1.9.1.  Confirmed compatible.
+
 ### Testing ###
 I have tested with Android 3.2+ (Chrome only),
 iOS5+ Safari, Chrome 15+, Firefox, and IE.
 
 The browser in Windows 8 RT has issues.
 
-*This special event handler breaks in jQuery 1.8+.*
-And yes, fixing that is on my TODO list.
+*This special event handler has been tested on 1.7.0 - 1.9.1*
 
 ## Examples ##
 
@@ -171,7 +173,6 @@ jQuery mobile.
 ## TODO ##
 
 - Add to "See also" sections.
-- Update to 1.8.x +
 
 ## Contribute! ##
 
