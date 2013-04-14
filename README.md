@@ -12,7 +12,7 @@ Supported motions for both desktop and touch devices include:
 - long-press drag
 - zoom
 
-Please see the `ue-test.html` file for a demonstration of the different motions.  Most test tiles below the second row are negative test cases and should not be draggable (the one exception is the 'held+helddrag' example). NOTICE: THIS IS NOT YET COMPATIBLE with jQuery 1.8+, but works well with 1.7.2.",
+Please see the `ue-test.html` file for a demonstration of the different motions.  Most test tiles below the second row are negative test cases and should not be draggable (the one exception is the 'held+helddrag' example). **Now compatible with jQuery 1.7.0-1.9.1**.",
 
 ## Release Notes ##
 
