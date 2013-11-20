@@ -14,6 +14,16 @@ Supported motions for both desktop and touch devices include:
 
 Please see the `ue-test.html` file for a demonstration of the different motions.  Most test tiles below the second row are negative test cases and should not be draggable (the one exception is the 'held+helddrag' example). **Now compatible with jQuery 1.7.0-1.9.1**!
 
+## Browser Support ##
+
+This plugin is useful for all modern browsers (IE9+ and later version of Chrome, Safari, and Firefox).
+IE9 may require edge settings:
+
+    <html>
+    <head>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      ....
+
 ## Release Notes ##
 
 ### Copyright (c)###
