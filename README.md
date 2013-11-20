@@ -178,11 +178,11 @@ This works:
 
 ## See also ##
 
-jQuery mobile.
+The Hammer touch library, jQuery mobile.
 
 ## TODO ##
 
-- Add to "See also" sections.
+- Support a wider range of motions
 
 ## Contribute! ##
 
