@@ -1,5 +1,5 @@
 { "name"     : "event.ue",
-  "version"  : "0.3.2",
+  "version"  : "0.3.3",
   "title"    : "Unified mouse and mobile touch input events",
   "author"   : {
     "name"  : "Michael S. Mikowski",
