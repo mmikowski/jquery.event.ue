@@ -662,7 +662,10 @@
     event.timeStamp = timestamp;
 
     switch ( event.type ) {
-      case 'touchstart' : handler_fn = fnMotionStart; break;
+      case 'touchstart' :
+        handler_fn = fnMotionStart;
+        event.preventDefault();
+        break;
       case 'touchmove'  :
         handler_fn = fnMotionMove;
         event.preventDefault();
