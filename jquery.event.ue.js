@@ -665,7 +665,7 @@
       case 'touchstart' :
         handler_fn = fnMotionStart;
         event.preventDefault();
-        break;
+      break;
       case 'touchmove'  :
         handler_fn = fnMotionMove;
         event.preventDefault();
