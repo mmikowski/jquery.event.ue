@@ -28,6 +28,16 @@ The plugin, used with a few other well-chosen tools, form a fantastic basis for 
 
 This suite of tools has all the capabilities of modern framework libraries but, when used correctly, can vastly improve flexibility and testability. It leverages jQuery's excellent built-in tools instead of ignoring them!
 
+## Browser Support ##
+
+This plugin is useful for all modern browsers (IE9+ and later version of Chrome, Safari, and Firefox).
+IE9 may require edge settings:
+
+    <html>
+    <head>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      ....
+
 ## Release Notes ##
 
 ### Copyright (c)###
@@ -185,11 +195,11 @@ This works:
 
 ## See also ##
 
-jQuery mobile.
+The Hammer touch library, jQuery mobile.
 
 ## TODO ##
 
-- Add to "See also" sections.
+- Support a wider range of motions
 
 ## Contribute! ##
 

@@ -158,10 +158,11 @@
 
       if ( ! isMoveBound ) {
         // console.log('first element bound - adding global binds');
-        $(document).bind( 'mousemove.__ue', onMouse  );
-        $(document).bind( 'touchmove.__ue', onTouch  );
-        $(document).bind( 'mouseup.__ue'  , onMouse  );
-        $(document).bind( 'touchend.__ue' , onTouch  );
+        $(document).bind( 'mousemove.__ue',   onMouse );
+        $(document).bind( 'touchmove.__ue',   onTouch );
+        $(document).bind( 'mouseup.__ue'  ,   onMouse );
+        $(document).bind( 'touchend.__ue' ,   onTouch );
+        $(document).bind( 'touchcancel.__ue', onTouch );
         isMoveBound = true;
       }
     },
@@ -280,6 +281,7 @@
         $(document).unbind( 'touchmove.__ue');
         $(document).unbind( 'mouseup.__ue');
         $(document).unbind( 'touchend.__ue');
+        $(document).unbind( 'touchcancel.__ue');
         isMoveBound = false;
       }
     }
@@ -661,12 +663,16 @@
     event.timeStamp = timestamp;
 
     switch ( event.type ) {
-      case 'touchstart' : handler_fn = fnMotionStart; break;
+      case 'touchstart' :
+        handler_fn = fnMotionStart;
+        event.preventDefault();
+      break;
       case 'touchmove'  :
         handler_fn = fnMotionMove;
         event.preventDefault();
       break;
-      case 'touchend'   : handler_fn = fnMotionEnd;   break;
+      case 'touchend'    : 
+      case 'touchcancel' : handler_fn = fnMotionEnd;   break;
       default : handler_fn = null;
     }
 
@@ -751,4 +757,3 @@
   };
 
 }(jQuery));
-
