@@ -12,7 +12,21 @@ Supported motions for both desktop and touch devices include:
 - long-press drag
 - zoom
 
-Please see the `ue-test.html` file for a demonstration of the different motions.  Most test tiles below the second row are negative test cases and should not be draggable (the one exception is the 'held+helddrag' example). **Now compatible with jQuery 1.7.0-1.9.1**!
+Please see the `ue-test.html` file for a demonstration of the different motions.  Most test tiles below the second row are negative test cases and should not be draggable (the one exception is the 'held+helddrag' example). **Compatible with jQuery 1.7.0+.**
+
+## Replace Backbone with something much more robust ##
+
+The plugin, used with a few other well-chosen tools, form a fantastic basis for a lean, easy to use SPA architecture as detailed in the [the book](http://manning.com/mikowski)(http://manning.com/mikowski).  Here are the recommended tools:
+
+- Model Events: This plugin uses the jQuery event mechanism, which eliminates having to manage two different event types.
+- Routing: Use [uriAnchor](https://github.com/mmikowski/urianchor/) for much more robust routing, including support to independent and dependent query arguments.
+- Data Model: Use [taffyDB](https://github.com/typicaljoe/taffydb/) for
+  superior and more flexible client side data management.
+- Templating: Use [Dust](http://linkedin.github.io/dustjs/) for much more useful templates that don't tempt you to intermingle display methods with application logic.
+- Promises: Use jQuery native promise methods.
+- AJAX: Use jQuery native AJAX methods.
+
+This suite of tools has all the capabilities of modern framework libraries but, when used correctly, can vastly improve flexibility and testability. It leverages jQuery's excellent built-in tools instead of ignoring them!
 
 ## Release Notes ##
 
@@ -28,6 +42,9 @@ This is the first release registered with jQuery plugins.
 
 ### Version 0.3.2 ###
 Tested with jQuery 1.7.0 through 1.9.1.  Confirmed compatible.
+
+### Version 0.4.1 ###
+Updated documentation.
 
 ### Testing ###
 I have tested with Android 3.2+ (Chrome only),

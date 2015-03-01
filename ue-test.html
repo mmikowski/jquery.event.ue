@@ -385,88 +385,88 @@ $(document).ready( function() {
   $('#uheld').bind('uheld.uheld', onHeld  );
 
   $('#uzoom')
-     .bind('uzoomstart', onZoomstart )
-     .bind('uzoommove',  onZoommove  )
-     .bind('uzoomend',   onZoomend   )
+     .bind('uzoomstart',        onZoomstart )
+     .bind('uzoommove',         onZoommove  )
+     .bind('uzoomend',          onZoomend   )
 
   $('#udrag')
-    .bind('udragstart.udrag', onDragstart )
-    .bind('udragmove.udrag',  onDragmove  )
-    .bind('udragend.udrag',   onDragend   )
+    .bind('udragstart.udrag',   onDragstart )
+    .bind('udragmove.udrag',    onDragmove  )
+    .bind('udragend.udrag',     onDragend   )
     ;
 
   $('#uhelddrag')
-    .bind('uheldstart.uheldd', onDragstart )
-    .bind('uheldmove.uheldd',  onDragmove  )
-    .bind('uheldend.uheldd',   onDragend   )
+    .bind('uheldstart.uheldd',  onDragstart )
+    .bind('uheldmove.uheldd',   onDragmove  )
+    .bind('uheldend.uheldd',    onDragend   )
     ;
 
   $('#combo1')
-    .bind('utap.combo1',       onTap       )
-    .bind('uheld.combo1',      onHeld      )
+    .bind('utap.combo1',        onTap       )
+    .bind('uheld.combo1',       onHeld      )
     ;
 
   $('#combo2')
-    .bind('utap.combo2',       onTap       )
-    .bind('uheld.combo2',      onHeld      )
-    .bind('udragstart.combo2', onDragstart )
-    .bind('udragmove.combo2',  onDragmove  )
-    .bind('udragend.combo2',   onDragend   )
+    .bind('utap.combo2',        onTap       )
+    .bind('uheld.combo2',       onHeld      )
+    .bind('udragstart.combo2',  onDragstart )
+    .bind('udragmove.combo2',   onDragmove  )
+    .bind('udragend.combo2',    onDragend   )
     ;
 
   $('#combo3')
-    .bind('utap.combo3',       onTap       )
-    .bind('uheld.combo3',      onHeld      )
-    .bind('uheldstart.combo3', onDragstart )
-    .bind('uheldmove.combo3',  onDragmove  )
-    .bind('uheldend.combo3',   onDragend   )
+    .bind('utap.combo3',        onTap       )
+    .bind('uheld.combo3',       onHeld      )
+    .bind('uheldstart.combo3',  onDragstart )
+    .bind('uheldmove.combo3',   onDragmove  )
+    .bind('uheldend.combo3',    onDragend   )
     ;
 
   $('#combo4')
-    .bind('utap.combo4',       onTap       )
-    .bind('uheld.combo4',      onHeld      )
-    .bind('uheldstart.combo4', onDragstart )
-    .bind('uheldmove.combo4',  onDragmove  )
-    .bind('uheldend.combo4',   onDragend   )
-    .bind('udragstart.combo4', onDragstart )
-    .bind('udragmove.combo4',  onDragmove  )
-    .bind('udragend.combo4',   onDragend   )
+    .bind('utap.combo4',        onTap       )
+    .bind('uheld.combo4',       onHeld      )
+    .bind('uheldstart.combo4',  onDragstart )
+    .bind('uheldmove.combo4',   onDragmove  )
+    .bind('uheldend.combo4',    onDragend   )
+    .bind('udragstart.combo4',  onDragstart )
+    .bind('udragmove.combo4',   onDragmove  )
+    .bind('udragend.combo4',    onDragend   )
     ;
 
   $('#combo5')
-    .bind('utap.combo5',       onTap       )
-    .bind('uheld.combo5',      onHeld      )
-    .bind('udragstart.combo5', null          )
+    .bind('utap.combo5',        onTap       )
+    .bind('uheld.combo5',       onHeld      )
+    .bind('udragstart.combo5',  null        )
     ;
 
   $('#combo6')
-    .bind('utap.combo6',       onTap       )
-    .bind('uheld.combo6',      onHeld      )
-    .bind('udragmove.combo6',  onDragmove  )
+    .bind('utap.combo6',        onTap       )
+    .bind('uheld.combo6',       onHeld      )
+    .bind('udragmove.combo6',   onDragmove  )
     ;
 
   $('#combo7')
-    .bind('utap.combo7',       onTap       )
-    .bind('uheld.combo7',      onHeld      )
-    .bind('udragend.combo7',   onDragend   )
+    .bind('utap.combo7',        onTap       )
+    .bind('uheld.combo7',       onHeld      )
+    .bind('udragend.combo7',    onDragend   )
     ;
 
   $('#combo8')
-    .bind('utap.combo8',       onTap       )
-    .bind('uheld.combo8',      onHeld      )
-    .bind('uheldstart.combo8', null          )
+    .bind('utap.combo8',        onTap       )
+    .bind('uheld.combo8',       onHeld      )
+    .bind('uheldstart.combo8',  null        )
     ;
 
   $('#combo9')
-    .bind('utap.combo9',       onTap       )
-    .bind('uheld.combo9',      onHeld      )
-    .bind('uheldmove.combo9',  onDragmove  )
+    .bind('utap.combo9',        onTap       )
+    .bind('uheld.combo9',       onHeld      )
+    .bind('uheldmove.combo9',   onDragmove  )
     ;
 
   $('#combo10')
-    .bind('utap.combo10',      onTap       )
-    .bind('uheld.combo10',     onHeld      )
-    .bind('uheldend.combo10',  onDragend   )
+    .bind('utap.combo10',       onTap       )
+    .bind('uheld.combo10',      onHeld      )
+    .bind('uheldend.combo10',   onDragend   )
   ;
   $('#combo11')
     .bind('uheld.combo11',      onHeld      )
@@ -477,7 +477,7 @@ $(document).ready( function() {
 
   $('#combo12')
     .bind('uheld.combo12',      onHeld      )
-    .bind('uheldstart.combo12', null          )
+    .bind('uheldstart.combo12', null        )
     ;
 
   $('#combo13')
