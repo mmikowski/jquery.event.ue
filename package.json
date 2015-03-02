@@ -1,7 +1,7 @@
 {
   "name": "jquery.event.ue",
-  "version": "0.4.1",
-  "description": "Unified mouse and touch events jQuery plugin.  Use this plugin to handle both keyboard-mouse and mobile touch motions with a unified set of events.  It is currently being used in a commercial SPA and is featured in the book [Single page web applications - JavaScript end-to-end](http://manning.com/mikowski).  Supported motions for both desktop and touch devices include tap, long-press, drag, long-press-drag, and zoom.  See the README.md on the home page for much greater detail.  Please see 'ue-test.html' file for a demonstration of the different motions.  Most test tiles below the second row are negative test cases and should not be draggable (the one exception is the 'held+helddrag' example).",
+  "version": "0.4.2",
+  "description": "Unified input events jQuery plugin - support both Touch and Desktop using the same events. Used in numerous commercial SPAs and featured in a best-selling book on SPAs.",
   "keywords": [
     "event","events","touch","mobile","phone","tablet",
     "unified","drag","zoom","tap","click"

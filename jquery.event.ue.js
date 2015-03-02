@@ -14,7 +14,7 @@
  *  0.3.1 - Change for jQuery plugins site
  *  0.3.2 - Updated to jQuery 1.9.1.
  *          Confirmed 1.7.0-1.9.1 compatibility.
- *  0.4.1 - Updated documentation
+ *  0.4.2 - Updated documentation
  *
 */
 

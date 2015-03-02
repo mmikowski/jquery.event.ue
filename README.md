@@ -2,7 +2,8 @@
 
 ## Summary ##
 
-Use this jQuery plugin to handle both keyboard-mouse and mobile touch motions with a unified set of events. It is currently being used in a commercial SPA and is featured in the book [Single page web applications - JavaScript end-to-end](http://manning.com/mikowski).
+Use this jQuery plugin to handle both desktop and touch input with a unified
+set of events. It is currently being used commercial SPAs and is featured in the book [Single page web applications - JavaScript end-to-end](http://manning.com/mikowski).
 
 Supported motions for both desktop and touch devices include:
 
@@ -16,17 +17,17 @@ Please see the `ue-test.html` file for a demonstration of the different motions.
 
 ## Replace Backbone with something much more robust ##
 
-The plugin, used with a few other well-chosen tools, form a fantastic basis for a lean, easy to use SPA architecture as detailed in the [the book](http://manning.com/mikowski)(http://manning.com/mikowski).  Here are the recommended tools:
+The plugin, used with a few other well-chosen tools, form a fantastic basis for a lean, easy to use SPA architecture as detailed in the [the book](http://manning.com/mikowski)(http://manning.com/mikowski). Here are the recommended tools:
 
-- Model Events: This plugin uses the jQuery event mechanism, which eliminates having to manage two different event types.
-- Routing: Use [uriAnchor](https://github.com/mmikowski/urianchor/) for much more robust routing, including support to independent and dependent query arguments.
-- Data Model: Use [taffyDB](https://github.com/typicaljoe/taffydb/) for
-  superior and more flexible client side data management.
-- Templating: Use [Dust](http://linkedin.github.io/dustjs/) for much more useful templates that don't tempt you to intermingle display methods with application logic.
-- Promises: Use jQuery native promise methods.
-- AJAX: Use jQuery native AJAX methods.
+- AJAX: Use **native jQuery** AJAX methods.
+- Promises: Use **native jQuery** promise methods.
+- Model Events: Use the **jQuery plugin** [jquery.event.gevent](https://www.npmjs.com/package/jquery.event.gevent) as a unified event mechanism.  This eliminates having to manage multiple event types in your SPA.
+- Routing: Use the **jQuery plugin** [jquery.urianchor](https://www.npmjs.com/package/jquery.urianchor) for much more robust routing, including support to independent and dependent parameters.
+- Touch interface: Use the **jQuery plugin** [jquery.event.ue](https://www.npmjs.com/package/jquery.event.ue) to handle touch and mouse events.
+- Data Model: Use the **focused library** [taffyDB](https://github.com/typicaljoe/taffydb/) for superior and more flexible client side data management.
+- Templating: Use **focused library** [Dust](http://linkedin.github.io/dustjs/) for much more useful templates that don't tempt you to intermingle display methods with application logic.
 
-This suite of tools has all the capabilities of modern framework libraries but, when used correctly, can vastly improve flexibility and testability. It leverages jQuery's excellent built-in tools instead of ignoring them!
+This suite of tools has all the capabilities of modern framework libraries but, when used correctly, can vastly improve flexibility and testability. It takes advantage jQuery's excellent built-in tools instead of competing with them.
 
 ## Browser Support ##
 
@@ -51,18 +52,16 @@ http://jquery.org/license
 This is the first release registered with jQuery plugins.
 
 ### Version 0.3.2 ###
-Tested with jQuery 1.7.0 through 1.9.1.  Confirmed compatible.
+Confirmed compatible with jQuery 1.7.0 through 1.9.1.
 
-### Version 0.4.1 ###
-Updated documentation.
+### Versions 0.4.1-2 ###
+Updated documentation and npm release.
 
 ### Testing ###
 I have tested with Android 3.2+ (Chrome only),
 iOS5+ Safari, Chrome 15+, Firefox, and IE.
 
 The browser in Windows 8 RT has issues.
-
-*This special event handler has been tested on 1.7.0 - 1.9.1*
 
 ## Examples ##
 
