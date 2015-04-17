@@ -15,6 +15,8 @@
  *  0.3.2 - Updated to jQuery 1.9.1.
  *          Confirmed 1.7.0-1.9.1 compatibility.
  *  0.4.2 - Updated documentation
+ *  0.4.3 - Removed fatal execption possibility if originalEvent
+ *          is not defined on event object
  *
 */
 
@@ -119,8 +121,8 @@
   Ue = {
     setup : function( data, a_names, fn_bind ) {
       var
-        elem_this = this,
-        $to_bind  = $(elem_this),
+        this_el     = this,
+        $to_bind    = $(this_el),
         seen_map    = {},
         option_map, idx, namespace_key, ue_namespace_code, namespace_list
         ;
@@ -131,7 +133,7 @@
 
       option_map = {};
       $.extend( true, option_map, defaultOptMap );
-      $.data( elem_this, optionKey, option_map );
+      $.data( this_el, optionKey, option_map );
 
       namespace_list = makeListPlus(a_names.slice(0));
       if ( ! namespace_list.length 
@@ -154,7 +156,7 @@
         $to_bind.bind( 'mousewheel' + ue_namespace_code, onMousewheel );
       }
 
-      boundList.push_uniq( elem_this ); // record as bound element
+      boundList.push_uniq( this_el ); // record as bound element
 
       if ( ! isMoveBound ) {
         // console.log('first element bound - adding global binds');
@@ -182,8 +184,8 @@
     // this always executes immediate after setup (if first binding)
     add : function ( arg_map ) {
       var
-        elem_this       = this,
-        option_map      = $.data( elem_this, optionKey ),
+        this_el         = this,
+        option_map      = $.data( this_el, optionKey ),
         namespace_str   = arg_map.namespace,
         event_type      = arg_map.type,
         bound_ns_map, namespace_list, idx, namespace_key
@@ -650,12 +652,12 @@
   // We use the 'type' attribute to dispatch to motion control
   onTouch = function ( event ) {
     var
-      elem_this   = this,
+      this_el     = this,
       timestamp   = +new Date(),
       o_event     = event.originalEvent,
-      a_touches   = o_event.changedTouches || [],
-      idx, touch_event, motion_id,
-      handler_fn
+      touch_list  = o_event ? o_event.changedTouches || [] : [],
+      touch_count = touch_list.length,
+      idx, touch_event, motion_id, handler_fn
       ;
 
     doDisableMouse = true;
@@ -678,15 +680,15 @@
 
     if ( ! handler_fn ) { return; }
 
-    for ( idx = 0; idx < a_touches.length; idx++ ) {
-      touch_event  = a_touches[idx];
+    for ( idx = 0; idx < touch_count; idx++ ) {
+      touch_event  = touch_list[idx];
 
       motion_id = 'touch' + String(touch_event.identifier);
 
       event.clientX   = touch_event.clientX;
       event.clientY   = touch_event.clientY;
       handler_fn({
-        elem      : elem_this,
+        elem      : this_el,
         motion_id : motion_id,
         event_src : event
       });
@@ -699,7 +701,7 @@
   // We use the 'type' attribute to dispatch to motion control
   onMouse = function ( event ) {
     var
-      elem_this     = this,
+      this_el       = this,
       motion_id     = 'mouse' + String(event.button),
       request_dzoom = false,
       handler_fn
@@ -730,7 +732,7 @@
     if ( ! handler_fn ) { return; }
 
     handler_fn({
-      elem          : elem_this,
+      elem          : this_el,
       event_src     : event,
       request_dzoom : request_dzoom,
       motion_id     : motion_id
