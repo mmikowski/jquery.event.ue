@@ -2,8 +2,10 @@
 
 ## Summary ##
 
-Use this jQuery plugin to handle both desktop and touch input with a unified
-set of events. It is currently being used commercial SPAs and is featured in the book [Single page web applications - JavaScript end-to-end](http://manning.com/mikowski).
+Use this jQuery plugin to handle both desktop and touch input
+with unified events. It is currently being used in commercial SPAs 
+and is featured in the book
+[Single page web applications - JavaScript end-to-end][1]
 
 Supported motions for both desktop and touch devices include:
 
@@ -13,55 +15,25 @@ Supported motions for both desktop and touch devices include:
 - long-press drag
 - zoom
 
-Please see the `ue-test.html` file for a demonstration of the different motions.  Most test tiles below the second row are negative test cases and should not be draggable (the one exception is the 'held+helddrag' example). **Compatible with jQuery 1.7.0+.**
+Please see the `ue-test.html` file for a demonstration of the different
+motions.  Most test tiles below the second row are negative test cases
+and should not be draggable, with the one exception being **held+helddrag**. 
 
-## Replace Backbone with something much more robust ##
-
-The plugin, used with a few other well-chosen tools, form a fantastic basis for a lean, easy to use SPA architecture as detailed in the [the book](http://manning.com/mikowski)(http://manning.com/mikowski). Here are the recommended tools:
-
-- AJAX: Use **native jQuery** AJAX methods.
-- Promises: Use **native jQuery** promise methods.
-- Model Events: Use the **jQuery plugin** [jquery.event.gevent](https://www.npmjs.com/package/jquery.event.gevent) as a unified event mechanism.  This eliminates having to manage multiple event types in your SPA.
-- Routing: Use the **jQuery plugin** [jquery.urianchor](https://www.npmjs.com/package/jquery.urianchor) for much more robust routing, including support to independent and dependent parameters.
-- Touch interface: Use the **jQuery plugin** [jquery.event.ue](https://www.npmjs.com/package/jquery.event.ue) to handle touch and mouse events.
-- Data Model: Use the **focused library** [taffyDB](https://github.com/typicaljoe/taffydb/) for superior and more flexible client side data management.
-- Templating: Use **focused library** [Dust](http://linkedin.github.io/dustjs/) for much more useful templates that don't tempt you to intermingle display methods with application logic.
-
-This suite of tools has all the capabilities of modern framework libraries but, when used correctly, can vastly improve flexibility and testability. It takes advantage jQuery's excellent built-in tools instead of competing with them.
+Compatible with jQuery 1.7.0+.
 
 ## Browser Support ##
 
-This plugin is useful for all modern browsers (IE9+ and later version of Chrome, Safari, and Firefox).
+This was originally written in 2012 and has changed occassionaly since.
+Works with iOS5+ (Stock browser) and Android 3.2+ (Chrome) and of course
+all modern desktop browsers (IE9+ and later version of
+Chrome, Safari, and Firefox.
+
 IE9 may require edge settings:
 
     <html>
     <head>
       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
       ....
-
-## Release Notes ##
-
-### Copyright (c)###
-2013 Michael S. Mikowski (mike[dot]mikowski[at]gmail[dotcom])
-
-### License ###
-Dual licensed under the MIT or GPL Version 2
-http://jquery.org/license
-
-### Version 0.3.1 ###
-This is the first release registered with jQuery plugins.
-
-### Version 0.3.2 ###
-Confirmed compatible with jQuery 1.7.0 through 1.9.1.
-
-### Versions 0.4.1-2 ###
-Updated documentation and npm release.
-
-### Testing ###
-I have tested with Android 3.2+ (Chrome only),
-iOS5+ Safari, Chrome 15+, Firefox, and IE.
-
-The browser in Windows 8 RT has issues.
 
 ## Examples ##
 
@@ -92,11 +64,7 @@ The browser in Windows 8 RT has issues.
       .bind('uheldend.uheldd',   onDragend   )
       ;
 
-## Overview ##
-
-This was originally written in 2012 and has changed occassionaly since.
-Works with iOS5+ (Stock browser) and Android 3.2+ (Chrome) and of course
-all desktop browsers that I am aware.
+## Motions ##
 
 The following motions are supported:
 
@@ -110,27 +78,6 @@ Notice the event object is a little different,
 so take care, especially with event delegation.  The example
 HTML should help point the way.
 
-
-These are the event object attributes:
-
-- `event.px_start_x` : position for x at start of motion
-- `event.px_start_y` : ibid y
-- `event.px_current_x` : current x position
-- `event.px_current_y` : ibid y
-- `event.px_end_x` : position for x at end of motion
-- `event.px_end_y` : ibid y
-- `event.px_delta_zoom`: the delta in zoom since start of motion
-- `event.px_delta_x` : the delta in x position since start of motion
-- `event.px_delta_y` : ibid y
-- `event.orig_target` : element under cursor at start of motion
-- `event.elem_bound` : element on which event was bound
-- `event.elem_target` : element under the cursor (used for event delegation)
-- `event.timeStamp`
-- `event.ms_elapsed` : elapsed time since start of motion
-- `ms_timestart` : start time of motion
-- `ms_timestop` : stop time of motion
-
-## Supported events ##
 
 ### utap ###
 A click or a tap event results in a `utap` event.
@@ -176,12 +123,33 @@ A zoom motion, like drag, actually consists of three events:
 - `uzoommove`  - fires as zoom amount changes
 - `uzoomend`   - fires at end of zoom motion
 
+## Event Attributes ##
+
+These are the event object attributes:
+
+- `event.px_start_x` : position for x at start of motion
+- `event.px_start_y` : ibid y
+- `event.px_current_x` : current x position
+- `event.px_current_y` : ibid y
+- `event.px_end_x` : position for x at end of motion
+- `event.px_end_y` : ibid y
+- `event.px_delta_zoom`: the delta in zoom since start of motion
+- `event.px_delta_x` : the delta in x position since start of motion
+- `event.px_delta_y` : ibid y
+- `event.orig_target` : element under cursor at start of motion
+- `event.elem_bound` : element on which event was bound
+- `event.elem_target` : element under the cursor (used for event delegation)
+- `event.timeStamp`
+- `event.ms_elapsed` : elapsed time since start of motion
+- `ms_timestart` : start time of motion
+- `ms_timestop` : stop time of motion
+
 ## Error handling ##
 
 Like many other plugins, this code does not throw exceptions.
 Instead, it does its work quietly.
 
-## Namespacing! ##
+## Namespacing ##
 
 Notice that jQuery event namespacing is fully supported.
 This works:
@@ -191,6 +159,66 @@ This works:
         .on( 'uheld.mytap', onHeldMsg );
 
       $( '#msg' ).unbind( '.mytap' );
+
+## Avoid complex 'SPA framework' libraries ##
+
+jQuery used with this and a few other well-chosen tools forms
+a fantastic basis for a lean, easy to use SPA architecture
+as detailed in [Single page web applications, JavaScript end-to-end][1].
+Here are the recommended tools:
+
+| Capability   | Tool                | Notes                             |
+| ------------ | ------------------- | ----------------------------------|
+| Websockets   | [Socket.io][6]      | Prefer websockets over AJAX.      |
+| AJAX         | jQuery native       | Use jQuery AJAX methods.          |
+| Promises     | jQuery native       | Use jQuery promise methods.       |
+| Model Events | [Global Events][2]  | jQuery plugin eliminates having   |
+|              |                     | to manage multiple event types.   |
+| Touch        | [Unified events][3] | Unify desktop and touch events.   |
+| Routing      | [uriAnchor][4]      | jQuery plugin for robust routing. |
+|              |                     | Includes support for dependent    |
+|              |                     | and independent query arguments.  |
+| Data Model   | [taffyDB][5]        | A powerful and flexible SQL-like  |
+|              |                     | client data management tool.      |
+| SVG          | [D3][7]             | Great for easy graphs and charts  |
+|              | [SVG][8]            | Low-level jQuery plugin           |
+| Templates    | [Dust][9]           | Uses a powerful template DSL that |
+|              |                     | minimizes chances to intemingle   |
+|              |                     | business and display logic.       |
+
+This suite of tools has all the capabilities of a bleeding-edge 
+SPA "framework" library within the reliable and mature jQuery ecosystem.
+It can provide an application that is significantly more flexible and
+testable since display logic can easily be decoupled from business logic.
+Finally, it leverages jQuery's maturity, performance, and excellent
+tools instead of competing with them.
+
+## Release Notes ##
+
+### Copyright (c)###
+2013 Michael S. Mikowski (mike[dot]mikowski[at]gmail[dotcom])
+
+### License ###
+Dual licensed under the MIT or GPL Version 2
+http://jquery.org/license
+
+### Version 0.3.1 ###
+This is the first release registered with jQuery plugins.
+
+### Version 0.3.2 ###
+Confirmed compatible with jQuery 1.7.0 through 1.9.1.
+
+### Versions 0.4.1-3 ###
+Updated documentation and npm release.
+
+### Versions 0.5.0 ###
+Updated documentation
+
+### Testing ###
+I have tested with Android 3.2+ (Chrome only),
+iOS5+ Safari, Chrome 15+, Firefox, and IE.
+
+The browser in Windows 8 RT has issues.
 
 ## See also ##
 
@@ -206,6 +234,14 @@ If you want to help out, like all jQuery plugins this is hosted at
 GitHub.  Any improvements or suggestions are welcome!
 You can reach me at mike[dot]mikowski[at]gmail[dotcom].
 
-Cheers, Mike
+## END ##
 
-END
+[1]:http://manning.com/mikowski
+[2]:https://github.com/mmikowski/jquery.event.gevent
+[3]:https://github.com/mmikowski/jquery.event.ue
+[4]:https://github.com/mmikowski/urianchor
+[5]:https://github.com/typicaljoe/taffydb
+[6]:http://socket.io
+[7]:https://github.com/mbostock/d3
+[8]:http://keith-wood.name/svg.html
+[9]:http://linkedin.github.io/dustjs
