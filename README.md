@@ -195,7 +195,7 @@ tools instead of competing with them.
 
 ## Release Notes ##
 
-### Copyright (c)###
+### Copyright (c) ###
 2013 Michael S. Mikowski (mike[dot]mikowski[at]gmail[dotcom])
 
 ### License ###
@@ -211,7 +211,7 @@ Confirmed compatible with jQuery 1.7.0 through 1.9.1.
 ### Versions 0.4.1-3 ###
 Updated documentation and npm release.
 
-### Versions 0.5.0 ###
+### Versions 0.5.0-0.5.2 ###
 Updated docs, jslint compatibility, removed cruft, updated test page
 to include zoom support (shift + mb1 hold + mouse up/down ).
 
@@ -222,12 +222,10 @@ iOS5+ Safari, Chrome 15+, Firefox, and IE.
 The browser in Windows 8 RT has issues.
 
 ## See also ##
-
 The Hammer touch library, jQuery mobile.
 
 ## TODO ##
-
-- Support a wider range of motions
+Support a wider range of motions
 
 ## Contribute! ##
 
