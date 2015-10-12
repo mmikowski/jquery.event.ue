@@ -212,7 +212,8 @@ Confirmed compatible with jQuery 1.7.0 through 1.9.1.
 Updated documentation and npm release.
 
 ### Versions 0.5.0 ###
-Updated documentation
+Updated docs, jslint compatibility, removed cruft, updated test page
+to include zoom support (shift + mb1 hold + mouse up/down ).
 
 ### Testing ###
 I have tested with Android 3.2+ (Chrome only),

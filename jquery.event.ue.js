@@ -1,5 +1,5 @@
 /*
- * Jquery plugin for unified mouse and touch events
+ * jQuery plugin for unified mouse and touch events
  *
  * Copyright (c) 2013 Michael S. Mikowski
  * (mike[dot]mikowski[at]gmail[dotcom])
@@ -17,15 +17,17 @@
  *  0.4.2 - Updated documentation
  *  0.4.3 - Removed fatal execption possibility if originalEvent
  *          is not defined on event object
+ *  0.5.0 - Updated docs, removed cruft, updated for jslint,
+ *          updated test page (zoom)
  *
 */
 
 /*jslint           browser : true,   continue : true,
   devel  : true,    indent : 2,       maxerr  : 50,
   newcap : true,  plusplus : true,    regexp  : true,
-  sloppy : true,      vars : true,     white  : true
+  sloppy : true,      vars : false,     white  : true
 */
-/*global jQuery, sl */
+/*global jQuery */
 
 (function ( $ ) {
   //---------------- BEGIN MODULE SCOPE VARIABLES --------------
@@ -54,8 +56,7 @@
 
     checkMatchVal, removeListVal,  pushUniqVal,   makeListPlus,
     fnHeld,        fnMotionStart,  fnMotionMove,
-    fnMotionEnd,   onMouse,        onTouch,
-    onMousewheel
+    fnMotionEnd,   onMouse,        onTouch
     ;
   //----------------- END MODULE SCOPE VARIABLES ---------------
 
@@ -119,13 +120,16 @@
 
   // Begin define special event handlers
   Ue = {
-    setup : function( data, a_names, fn_bind ) {
+    setup : function( data, name_list, bind_fn ) {
       var
         this_el     = this,
         $to_bind    = $(this_el),
         seen_map    = {},
         option_map, idx, namespace_key, ue_namespace_code, namespace_list
         ;
+
+      // jslint hack to allow unused arguments
+      if ( data && bind_fn ) { console.log( 'unused arguments' ); }
 
       // if previous related event bound do not rebind, but do add to
       // type of event bound to this element, if not already noted
@@ -135,7 +139,7 @@
       $.extend( true, option_map, defaultOptMap );
       $.data( this_el, optionKey, option_map );
 
-      namespace_list = makeListPlus(a_names.slice(0));
+      namespace_list = makeListPlus(name_list.slice(0));
       if ( ! namespace_list.length 
         || namespace_list[0] === ""
       ) { namespace_list = ["000"]; }
@@ -153,7 +157,6 @@
 
         $to_bind.bind( 'mousedown'  + ue_namespace_code, onMouse  );
         $to_bind.bind( 'touchstart' + ue_namespace_code, onTouch );
-        $to_bind.bind( 'mousewheel' + ue_namespace_code, onMousewheel );
       }
 
       boundList.push_uniq( this_el ); // record as bound element
@@ -203,7 +206,7 @@
 
       namespace_list = namespace_str.split('.');
 
-      for ( idx = 0; idx < namespace_list.length; idx++ ) {
+      for ( idx = 0; idx < namespace_list.length; idx += 1 ) {
         namespace_key = namespace_list[idx];
         bound_ns_map[event_type][namespace_key] = true;
       }
@@ -234,7 +237,7 @@
       // complete record.
       namespace_list = namespace_str.split('.');
 
-      for ( idx = 0; idx < namespace_list.length; idx++ ) {
+      for ( idx = 0; idx < namespace_list.length; idx += 1 ) {
         namespace_key = namespace_list[idx];
         if (bound_ns_map[event_type][namespace_key]) {
           delete bound_ns_map[event_type][namespace_key];
@@ -246,7 +249,7 @@
       }
     },
 
-    teardown : function( a_names ) {
+    teardown : function( name_list ) {
       var
         elem_bound   = this,
         $bound       = $(elem_bound),
@@ -258,7 +261,7 @@
       // do not tear down if related handlers are still bound
       if ( ! $.isEmptyObject( bound_ns_map ) ) { return; }
 
-      namespace_list = makeListPlus(a_names);
+      namespace_list = makeListPlus(name_list);
       namespace_list.push_uniq('000');
 
       NSPACE_01:
@@ -302,7 +305,7 @@
       event_ue
       ;
 
-    delete motion_map.idto_tapheld;
+    delete motion_map.tapheld_toid;
 
     if ( ! motion_map.do_allow_tap ) { return; }
 
@@ -418,7 +421,7 @@
     }
 
     if ( bound_ns_map.uheld || bound_ns_map.uheldstart ) {
-      motion_map.idto_tapheld = setTimeout(
+      motion_map.tapheld_toid = setTimeout(
         function() {
           fnHeld({
             motion_id  : motion_id,
@@ -533,9 +536,9 @@
       $.extend( event_ue, motion_map );
       $(motion_map.elem_bound).trigger(event_ue);
 
-      if ( motion_map.idto_tapheld ) {
-        clearTimeout(motion_map.idto_tapheld);
-        delete motion_map.idto_tapheld;
+      if ( motion_map.tapheld_toid ) {
+        clearTimeout(motion_map.tapheld_toid);
+        delete motion_map.tapheld_toid;
       }
     }
   };
@@ -578,9 +581,9 @@
     ;
 
     // clear-out any long-hold tap timer
-    if ( motion_map.idto_tapheld ) {
-      clearTimeout(motion_map.idto_tapheld);
-      delete motion_map.idto_tapheld;
+    if ( motion_map.tapheld_toid ) {
+      clearTimeout(motion_map.tapheld_toid);
+      delete motion_map.tapheld_toid;
     }
 
     // trigger utap
@@ -741,7 +744,6 @@
   // End event handler /onMouse/
   //-------------------- END EVENT HANDLERS --------------------
 
-
   // Export special events through jQuery API
   $Special.ue
     = $Special.utap       = $Special.uheld
@@ -757,5 +759,4 @@
       callback_nomatch : callback_nomatch || null
     });
   };
-
 }(jQuery));

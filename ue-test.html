@@ -37,7 +37,7 @@
     Notice IE as needs onselectstart = function(){ return false; }
   */
 
-  input, textarea, .sl-x-user-select {
+  input, textarea {
     -webkit-user-select: text;
     -khtml-user-select : text;
     -moz-user-select   : text;
@@ -303,14 +303,18 @@ $(document).ready( function() {
     ;
 
   onZoomstart = function ( event ){
-    // console.warn( 'uzoomstart', event );
     $('#uzoom-report-val').text(String(stateMap.zoom_num));
   };
 
   onZoommove = function ( event ){
-    // console.warn( 'uzoommove', event );
+    var scale_num, scale_str;
+    
+    scale_num = stateMap.zoom_num / 1000;
+    scale_str = 'scale(' + String( scale_num ) + ')';
+
     stateMap.zoom_num += event.px_delta_zoom || 0;
-    $('#uzoom-report-val').text(String(stateMap.zoom_num));
+    $( '#uzoom-report-val' ).text(String(stateMap.zoom_num));
+    $( '#uzoom' ).css({ transform : scale_str });
   };
 
   onZoomend = function ( event ){
