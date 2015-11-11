@@ -215,6 +215,10 @@ Updated documentation and npm release.
 Updated docs, jslint compatibility, removed cruft, updated test page
 to include zoom support (shift + mb1 hold + mouse up/down ).
 
+### Versions 0.6.0 ###
+Fixed held logic, added px\_tdelta]\_x and px\_tdelta\_y to attributes.
+Updated test page to include expected results.
+
 ### Testing ###
 I have tested with Android 3.2+ (Chrome only),
 iOS5+ Safari, Chrome 15+, Firefox, and IE.

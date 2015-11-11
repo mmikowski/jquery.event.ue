@@ -19,6 +19,8 @@
  *          is not defined on event object
  *  0.5.0 - Updated docs, removed cruft, updated for jslint,
  *          updated test page (zoom)
+ *  0.6.0 - Added px_tdelta_x and px_tdelta_y for total deltas from start
+ *        - Fixed onheld and drag conflicts
  *
 */
 
@@ -140,7 +142,7 @@
       $.data( this_el, optionKey, option_map );
 
       namespace_list = makeListPlus(name_list.slice(0));
-      if ( ! namespace_list.length 
+      if ( ! namespace_list.length
         || namespace_list[0] === ""
       ) { namespace_list = ["000"]; }
 
@@ -298,7 +300,7 @@
   // Begin motion control /fnHeld/
   fnHeld = function ( arg_map ) {
     var
-      timestamp         = +new Date(),
+      timestamp    = +new Date(),
       motion_id    = arg_map.motion_id,
       motion_map   = arg_map.motion_map,
       bound_ns_map = arg_map.bound_ns_map,
@@ -315,7 +317,7 @@
     motion_map.ms_elapsed   = timestamp - motion_map.ms_timestart;
 
     if ( bound_ns_map.uheld ) {
-      event_ue     = $.Event('uheld');
+      event_ue = $.Event('uheld');
       $.extend( event_ue, motion_map );
       $(motion_map.elem_bound).trigger(event_ue);
     }
@@ -356,9 +358,11 @@
     // :input selector includes text areas
     if ( $target.is( option_map.ignore_class ) ) { return; }
 
-    do_allow_tap = bound_ns_map.utap
-      || bound_ns_map.uheld || bound_ns_map.uheldstart
-      ? true : false;
+    do_allow_tap = (
+         bound_ns_map.utap
+      || bound_ns_map.uheld
+      || bound_ns_map.uheldstart
+    ) ? true : false;
 
     cb_map = callbackList.pop();
 
@@ -424,7 +428,7 @@
       motion_map.tapheld_toid = setTimeout(
         function() {
           fnHeld({
-            motion_id  : motion_id,
+            motion_id    : motion_id,
             motion_map   : motion_map,
             bound_ns_map : bound_ns_map
           });
@@ -441,12 +445,13 @@
       motion_id   = arg_map.motion_id,
       event_src   = arg_map.event_src,
       do_zoommove = false,
-      motion_map, option_map, bound_ns_map,
-      event_ue, px_pinch_zoom, px_delta_zoom,
-      mzoom1_map, mzoom2_map
+
+      motion_map,    option_map,  bound_ns_map,
+      is_over_rad,   event_ue,    px_pinch_zoom,
+      px_delta_zoom, mzoom1_map,  mzoom2_map
       ;
 
-    if ( ! motionMapMap[motion_id] ) { return; }
+    if ( ! motionMapMap[ motion_id ] ) { return; }
 
     motion_map   = motionMapMap[motion_id];
     option_map   = motion_map.option_map;
@@ -462,15 +467,21 @@
     motion_map.px_current_x = event_src.clientX;
     motion_map.px_current_y = event_src.clientY;
 
+    motion_map.px_tdelta_x  = motion_map.px_start_x - event_src.clientX;
+    motion_map.px_tdelta_y  = motion_map.px_start_y - event_src.clientY;
+
+    is_over_rad = (
+      Math.abs( motion_map.px_tdelta_x ) > option_map.px_radius
+      || Math.abs( motion_map.px_tdelta_y ) > option_map.px_radius
+    );
     // native event object override
     motion_map.timeStamp    = event_src.timeStamp;
 
     // disallow tap if outside of zone or time elapsed
     // we use this for other events, so we do it every time
     if ( motion_map.do_allow_tap ) {
-      if ( Math.abs(motion_map.px_delta_x) > option_map.px_radius
-        || Math.abs(motion_map.pd_delta_y) > option_map.px_radius
-        || motion_map.ms_elapsed           > option_map.tap_time
+      if ( is_over_rad
+        && motion_map.ms_elapsed > option_map.tap_time
       ) { motion_map.do_allow_tap = false; }
     }
 
@@ -526,10 +537,10 @@
       }
     }
 
-    if ( ! motionDragId
-      && ! motionHeldId
-      && bound_ns_map.udragstart
+    if ( bound_ns_map.udragstart
+      && is_over_rad
       && motion_map.do_allow_tap === false
+      && !( motionDragId && motionHeldId )
     ) {
       motionDragId = motion_id;
       event_ue = $.Event('udragstart');
@@ -576,6 +587,9 @@
     motion_map.px_end_x     = event_src.clientX;
     motion_map.px_end_y     = event_src.clientY;
 
+    motion_map.px_tdelta_x  = motion_map.px_start_x - motion_map.px_end_x;
+    motion_map.px_tdelta_y  = motion_map.px_start_y - motion_map.px_end_y;
+
     // native event object override
     motion_map.timeStamp    = event_src.timeStamp
     ;
@@ -588,7 +602,7 @@
 
     // trigger utap
     if ( bound_ns_map.utap
-      && motion_map.ms_elapsed   <= option_map.tap_time
+      && motion_map.ms_elapsed <= option_map.tap_time
       && motion_map.do_allow_tap
     ) {
       event_ue = $.Event('utap');
@@ -676,7 +690,7 @@
         handler_fn = fnMotionMove;
         event.preventDefault();
       break;
-      case 'touchend'    : 
+      case 'touchend'    :
       case 'touchcancel' : handler_fn = fnMotionEnd;   break;
       default : handler_fn = null;
     }
