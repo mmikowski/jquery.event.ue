@@ -311,11 +311,13 @@ $(document).ready( function() {
     ;
 
   onZoomstart = function ( event ){
+    console.log( event.type );
     $('#uzoom-report-val').text(String(stateMap.zoom_num));
   };
 
   onZoommove = function ( event ){
     var scale_num, scale_str;
+    console.log( event.type );
     
     scale_num = stateMap.zoom_num / 1000;
     scale_str = 'scale(' + String( scale_num ) + ')';
@@ -326,38 +328,39 @@ $(document).ready( function() {
   };
 
   onZoomend = function ( event ){
-    // console.warn( 'uzoomend', event );
+    console.log( event.type );
     $('#uzoom-report-val').text(String(stateMap.zoom_num));
   };
 
   onTap = function ( event ){
     var $this = $(this);
+    console.log( event.type );
+
     $this.css('background-color', '#cc0');
     setTimeout(function(){
       $this.css('background-color','');
     },200);
-    // console.log('tap', event);
     return false;
   };
 
   onHeld = function ( event ){
     var $this = $(this);
+    console.log( event.type );
+
     $this.css('background-color', '#0cc');
     setTimeout(function(){
       $this.css('background-color','');
     },200);
-    // console.log('held',event);
     return false;
   };
 
   onDragstart = function ( event ){
     var
       $this   = $(this),
-      color_code = event.type === 'uheldstart'
-        ? '#0ff' : '#ff0'
+      color_code = event.type === 'uheldstart' ? '#0ff' : '#ff0'
       ;
 
-    // console.log('dragstart', event);
+    console.log( event.type );
 
     if ( parseInt($this.css('z-index')) < stateMap.max_z_index ){
       stateMap.max_z_index++;
@@ -371,10 +374,12 @@ $(document).ready( function() {
   };
 
   onDragmove = function ( event ){
-    // console.log('dragmove', event);
     var
-      $this = $(this), offset_map
+      $this = $(this),
+      offset_map
       ;
+
+    console.log( event.type );
 
     if ( stateMap.px_drag_top === undefined ){
       offset_map = $this.offset();
@@ -388,7 +393,7 @@ $(document).ready( function() {
   };
 
   onDragend = function ( event ){
-    // console.log('dragend', event);
+    console.log( event.type );
     $(this).css({'border-color' : '', cursor : '' });
     stateMap.px_drag_top = stateMap.px_drag_left = undefined;
   };

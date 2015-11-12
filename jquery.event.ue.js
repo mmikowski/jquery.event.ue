@@ -43,7 +43,7 @@
     defaultOptMap   = {           // Default option hash
       bound_ns_map  : {},         // namspace hash e.g. bound_ns_map.utap.fred
       wheel_ratio   : 15,         // multiplier for mousewheel delta
-      px_radius     : 3,          // 'distance' dragged before dragstart
+      px_radius     : 5,          // 'distance' dragged before dragstart
       ignore_class  : ':input',   // 'not' suppress matching elements
       tap_time      : 200,        // millisecond max time to consider tap
       held_tap_time : 300         // millisecond min time to consider taphold
@@ -309,7 +309,7 @@
 
     delete motion_map.tapheld_toid;
 
-    if ( ! motion_map.do_allow_tap ) { return; }
+    if ( ! motion_map.do_allow_held ) { return; }
 
     motion_map.px_end_x     = motion_map.px_start_x;
     motion_map.px_end_y     = motion_map.px_start_y;
@@ -347,7 +347,7 @@
       bound_ns_map   = option_map.bound_ns_map,
       $target        = $(event_src.target ),
       do_zoomstart   = false,
-      motion_map, cb_map, do_allow_tap, event_ue
+      motion_map, cb_map, event_ue
       ;
 
     // this should never happen, but it does
@@ -357,12 +357,6 @@
 
     // :input selector includes text areas
     if ( $target.is( option_map.ignore_class ) ) { return; }
-
-    do_allow_tap = (
-         bound_ns_map.utap
-      || bound_ns_map.uheld
-      || bound_ns_map.uheldstart
-    ) ? true : false;
 
     cb_map = callbackList.pop();
 
@@ -383,21 +377,23 @@
     }
 
     motion_map = {
-      do_allow_tap : do_allow_tap,
-      elem_bound   : arg_map.elem,
-      elem_target  : event_src.target,
-      ms_elapsed   : 0,
-      ms_timestart : event_src.timeStamp,
-      ms_timestop  : undefined,
-      option_map   : option_map,
-      orig_target  : event_src.target,
-      px_current_x : event_src.clientX,
-      px_current_y : event_src.clientY,
-      px_end_x     : undefined,
-      px_end_y     : undefined,
-      px_start_x   : event_src.clientX,
-      px_start_y   : event_src.clientY,
-      timeStamp    : event_src.timeStamp
+      do_allow_tap  : bound_ns_map.utap ? true : false,
+      do_allow_held : ( bound_ns_map.uheld || bound_ns_map.uheldstart )
+        ? true : false,
+      elem_bound    : arg_map.elem,
+      elem_target   : event_src.target,
+      ms_elapsed    : 0,
+      ms_timestart  : event_src.timeStamp,
+      ms_timestop   : undefined,
+      option_map    : option_map,
+      orig_target   : event_src.target,
+      px_current_x  : event_src.clientX,
+      px_current_y  : event_src.clientY,
+      px_end_x      : undefined,
+      px_end_y      : undefined,
+      px_start_x    : event_src.clientX,
+      px_start_y    : event_src.clientY,
+      timeStamp     : event_src.timeStamp
     };
 
     motionMapMap[ motion_id ] = motion_map;
@@ -477,12 +473,15 @@
     // native event object override
     motion_map.timeStamp    = event_src.timeStamp;
 
-    // disallow tap if outside of zone or time elapsed
-    // we use this for other events, so we do it every time
-    if ( motion_map.do_allow_tap ) {
-      if ( is_over_rad
-        && motion_map.ms_elapsed > option_map.tap_time
-      ) { motion_map.do_allow_tap = false; }
+    // disallow held or tap if outside of zone
+    if ( is_over_rad ) {
+      motion_map.do_allow_tap  = false;
+      motion_map.do_allow_held = false;
+    }
+
+    // disallow tap if time has elapsed 
+    if ( motion_map.ms_elapsed > option_map.tap_time) {
+      motion_map.do_allow_tap = false;
     }
 
     if ( motion1ZoomId && motion2ZoomId
@@ -528,18 +527,21 @@
         $.extend( event_ue, motion_map );
         $(motion_map.elem_bound).trigger(event_ue);
       }
+      return;
     }
-    else if ( motionDragId === motion_id ) {
+
+    if ( motionDragId === motion_id ) {
       if ( bound_ns_map.udragmove ) {
         event_ue = $.Event('udragmove');
         $.extend( event_ue, motion_map );
         $(motion_map.elem_bound).trigger(event_ue);
       }
+      return;
     }
 
     if ( bound_ns_map.udragstart
-      && is_over_rad
-      && motion_map.do_allow_tap === false
+      && motion_map.do_allow_tap  === false
+      && motion_map.do_allow_held === false
       && !( motionDragId && motionHeldId )
     ) {
       motionDragId = motion_id;
