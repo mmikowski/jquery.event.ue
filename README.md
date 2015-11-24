@@ -224,6 +224,10 @@ The `px\_radius` parameter was doubled from 5px to 10px.  This made `utap` and
 `uheld` events work much better on smaller screens.  Confirmed compatible with
 with jQuery 2.1.4, thus 1.7.0 - 2.1.4 appear safe.
 
+### Versions 1.1.0 ###
+Updated npm keywords. No code changes.
+Version changed to represent maturity and stability.
+
 ### Testing ###
 I have tested with Android 3.2+ (Chrome only),
 iOS5+ Safari, Chrome 15+, Firefox, and IE.
