@@ -21,6 +21,7 @@
  *          updated test page (zoom)
  *  0.6.0 - Added px_tdelta_x and px_tdelta_y for total deltas from start
  *        - Fixed onheld and drag conflicts
+ *  0.6.1 - Default px_radius now 10 pixels
  *
 */
 
@@ -43,7 +44,7 @@
     defaultOptMap   = {           // Default option hash
       bound_ns_map  : {},         // namspace hash e.g. bound_ns_map.utap.fred
       wheel_ratio   : 15,         // multiplier for mousewheel delta
-      px_radius     : 5,          // 'distance' dragged before dragstart
+      px_radius     : 10,         // 'distance' dragged before dragstart
       ignore_class  : ':input',   // 'not' suppress matching elements
       tap_time      : 200,        // millisecond max time to consider tap
       held_tap_time : 300         // millisecond min time to consider taphold
