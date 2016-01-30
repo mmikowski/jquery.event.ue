@@ -1,11 +1,12 @@
 {
   "name": "jquery.event.ue",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Unified input events jQuery plugin - support both Touch and Desktop using the same events. Used in numerous commercial SPAs and featured in a best-selling book on SPAs.",
   "keywords": [
     "jquery-plugin",
     "ecosystem:jquery",
     "jquery", "plugin",
+    "jquery.event", "jquery.events.ue",
     "unified event",
     "unified events",
     "unified",
@@ -30,10 +31,10 @@
     "url": "https://github.com/mmikowski/jquery.event.ue/issues"
   },
   "homepage": "https://github.com/mmikowski/jquery.event.ue",
+  "dependencies": { "jquery": ">=1.7.0" },
 
   "jquery_extra": "Keys below are not used by the npm manifest",
   "title": "Unified mouse and touch events",
-  "dependencies": { "jquery": ">=1.7.0" },
   "licenses": [
     { "type": "MIT",
       "url": "https://github.com/jquery/jquery/blob/master/MIT-LICENSE.txt"

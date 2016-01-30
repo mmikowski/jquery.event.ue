@@ -216,21 +216,24 @@ Updated docs, jslint compatibility, removed cruft, updated test page
 to include zoom support (shift + mb1 hold + mouse up/down ).
 
 ### Versions 0.6.0 ###
-Fixed held logic, added `px\_tdelta]\_x` and `px\_tdelta\_y` to attributes.
+Fixed held logic, added `px_tdelta_x` and `px_tdelta_y` to attributes.
 Updated test page to include expected results.
 
 ### Versions 0.6.1 ###
-The `px\_radius` parameter was doubled from 5px to 10px.  This made `utap` and
-`uheld` events work much better on smaller screens.  Confirmed compatible with
+The default `px_radius` parameter was doubled from 5px to 10px.  This made `utap`
+and `uheld` events work much better on smaller screens.  Confirmed compatible with
 with jQuery 2.1.4, thus 1.7.0 - 2.1.4 appear safe.
 
 ### Versions 1.1.0 ###
 Updated npm keywords. No code changes.
 Version changed to represent maturity and stability.
 
+### Versions 1.1.1 ###
+Fixed typos and updated keywords.  No code change.
+
 ### Testing ###
 I have tested with Android 3.2+ (Chrome only),
-iOS5+ Safari, Chrome 15+, Firefox, and IE.
+iOS5+ Safari, Chrome 15+, Firefox 23, and IE 9+.
 
 The browser in Windows 8 RT has issues.
 
@@ -241,7 +244,6 @@ The Hammer touch library, jQuery mobile.
 Support a wider range of motions
 
 ## Contribute! ##
-
 If you want to help out, like all jQuery plugins this is hosted at
 GitHub.  Any improvements or suggestions are welcome!
 You can reach me at mike[dot]mikowski[at]gmail[dotcom].
