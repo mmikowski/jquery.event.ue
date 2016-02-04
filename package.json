@@ -1,7 +1,7 @@
 {
   "name": "jquery.event.ue",
-  "version": "1.1.1",
-  "description": "Unified input events jQuery plugin - support both Touch and Desktop using the same events. Used in numerous commercial SPAs and featured in a best-selling book on SPAs.",
+  "version": "1.1.2",
+  "description": "Support both Touch and Desktop using the same event handlers. Used in numerous commercial SPAs and featured in the book Single Page Web Applications - JavaScript end-to-end",
   "keywords": [
     "jquery-plugin",
     "ecosystem:jquery",

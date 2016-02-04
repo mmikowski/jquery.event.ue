@@ -8,22 +8,22 @@
  * http://jquery.org/license
  *
  * Versions
- *  0.3.0 - Initial jQuery plugin site release
- *        - Replaced scrollwheel zoom with drag motion.
- *          This resolved a conflict with scrollable areas.
- *  0.3.1 - Change for jQuery plugins site
- *  0.3.2 - Updated to jQuery 1.9.1.
- *          Confirmed 1.7.0-1.9.1 compatibility.
- *  0.4.2 - Updated documentation
- *  0.4.3 - Removed fatal execption possibility if originalEvent
- *          is not defined on event object
- *  0.5.0 - Updated docs, removed cruft, updated for jslint,
- *          updated test page (zoom)
- *  0.6.0 - Added px_tdelta_x and px_tdelta_y for total deltas from start
- *        - Fixed onheld and drag conflicts
- *  0.6.1 - Default px_radius now 10 pixels
- *  1.1.0 - Updated npm keywords. No code changes.
- *          Version changed to represent maturity and stability.
+ *  0.3.0   - Initial jQuery plugin site release
+ *          - Replaced scrollwheel zoom with drag motion.
+ *            This resolved a conflict with scrollable areas.
+ *  0.3.1   - Change for jQuery plugins site
+ *  0.3.2   - Updated to jQuery 1.9.1.
+ *            Confirmed 1.7.0-1.9.1 compatibility.
+ *  0.4.2   - Updated documentation
+ *  0.4.3   - Removed fatal execption possibility if originalEvent
+ *            is not defined on event object
+ *  0.5.0   - Updated docs, removed cruft, updated for jslint,
+ *            updated test page (zoom)
+ *  0.6.0   - Added px_tdelta_x and px_tdelta_y for deltas from start
+ *          - Fixed onheld and drag conflicts
+ *  0.6.1   - Default px_radius now 10 pixels
+ *  1.1.0-2 - No code changes. Updated npm keywords. Fixed typos.
+ *            Bumped version to represent maturity and stability.
  *
 */
 
