@@ -1,6 +1,6 @@
 {
   "name": "jquery.event.ue",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "Support both Touch and Desktop using the same event handlers. Used in numerous commercial SPAs and featured in the book Single Page Web Applications - JavaScript end-to-end",
   "keywords": [
     "jquery-plugin",

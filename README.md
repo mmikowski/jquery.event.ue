@@ -195,7 +195,7 @@ The default `px_radius` parameter was doubled from 5px to 10px.  This made `utap
 and `uheld` events work much better on smaller screens.  Confirmed compatible with
 with jQuery 2.1.4, thus 1.7.0 - 2.1.4 appear safe.
 
-### Versions 1.1.0-2 ###
+### Versions 1.1.0-3 ###
 **No code changes.**  Updated npm keywords. Fixed typos.
 Bumped version number to represent maturity and stability.
 Redirected library discussion to blog post.
