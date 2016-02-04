@@ -1,11 +1,7 @@
 # jquery.event.ue #
 
 ## Summary ##
-Use this jQuery plugin to use the same handlers for both desktop 
-and touch input events.  It is currently used in commercial SPAs 
-and is featured in the book
-[Single Page Aeb Applications - JavaScript end-to-end][1]
-which is also [available directly from Manning][2].
+Support both Touch and Desktop interfaces using the same event handlers, including tap (click), long-press, drag, long-press-drag, and pinch/mouse zoom. It is used in commercial SPAs and is featured in the best-selling book [Single Page Aeb Applications - JavaScript end-to-end][1] which is also [available directly from Manning][2].
 
 Supported motions for both desktop and touch devices include:
 
@@ -114,7 +110,7 @@ There are three events:
 
 ### zoom ###
 Zooming events.
-- *Desktop* uses a *shift-drag* motion.
+- *Desktop* uses a *shift+LMB down - swipe - LMB up* motion.
 - *Touch* uses a *pinching* motion.
 
 A zoom motion, like drag, actually consists of three events:
@@ -195,7 +191,7 @@ The default `px_radius` parameter was doubled from 5px to 10px.  This made `utap
 and `uheld` events work much better on smaller screens.  Confirmed compatible with
 with jQuery 2.1.4, thus 1.7.0 - 2.1.4 appear safe.
 
-### Versions 1.1.0-3 ###
+### Versions 1.1.0-4 ###
 **No code changes.**  Updated npm keywords. Fixed typos.
 Bumped version number to represent maturity and stability.
 Redirected library discussion to blog post.
