@@ -1,7 +1,7 @@
 # jquery.event.ue #
 
 ## Summary ##
-Support both Touch and Desktop interfaces using the same event handlers, including tap (click), long-press, drag, long-press-drag, and pinch/mouse zoom. It is used in commercial SPAs and is featured in the best-selling book [Single Page Aeb Applications - JavaScript end-to-end][1] which is also [available directly from Manning][2].
+Support both Touch and Desktop interfaces using the same event handlers, including tap (click), long-press, drag, long-press-drag, and pinch/mouse zoom. It is used in commercial SPAs and is featured in the best-selling book [Single Page Web Applications - JavaScript end-to-end][1] which is also [available directly from Manning][2].
 
 Supported motions for both desktop and touch devices include:
 

@@ -22,7 +22,7 @@
  *  0.6.0   - Added px_tdelta_x and px_tdelta_y for deltas from start
  *          - Fixed onheld and drag conflicts
  *  0.6.1   - Default px_radius now 10 pixels
- *  1.1.0-4 - No code changes. Updated npm keywords. Fixed typos.
+ *  1.1.0-5 - No code changes. Updated npm keywords. Fixed typos.
  *            Bumped version to represent maturity and stability.
  *
 */
