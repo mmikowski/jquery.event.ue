@@ -1,7 +1,7 @@
 {
   "name": "jquery.event.ue",
-  "version": "1.1.5",
-  "description": "Support both Touch and Desktop interfaces using the same event handlers, including tap (click), long-press, drag, long-press-drag, and pinch/mouse zoom. It is used in commercial SPAs and is featured in the best-selling book Single Page Web Applications - JavaScript end-to-end.",
+  "version": "1.1.7",
+  "description": "Respond to Touch and Desktop events using the same handlers, including tap (click), long-press, drag, long-press-drag, pinch/mouse zoom. Used in commercial SPAs and featured in the best-selling book Single Page Web Applications - JavaScript end-to-end.",
   "keywords": [
     "jquery-plugin",
     "ecosystem:jquery",

@@ -1,6 +1,10 @@
-# jquery.event.ue #
+# jquery.event.ue
+## Use libraries, not frameworks
+This is a library that strives to be best-in-class.
+If you are considering using an SPA framework, please read [Do you
+really want an SPA framework?][0] first.
 
-## Summary ##
+## Summary
 Support both Touch and Desktop interfaces using the same event handlers, including tap (click), long-press, drag, long-press-drag, and pinch/mouse zoom. It is used in commercial SPAs and is featured in the best-selling book [Single Page Web Applications - JavaScript end-to-end][1] which is also [available directly from Manning][2].
 
 Supported motions for both desktop and touch devices include:
@@ -13,12 +17,11 @@ Supported motions for both desktop and touch devices include:
 
 Please see the `ue-test.html` file for a demonstration of the different
 motions.  Most test tiles below the second row are negative test cases
-and should not be draggable, with the one exception being **held+helddrag**. 
+and should not be draggable, with the one exception being **held+helddrag**.
 
 Compatible with jQuery 1.7.0+.
 
-## Browser Support ##
-
+## Browser Support
 This was originally written in 2012 and has changed occassionaly since.
 Works with iOS5+ (Stock browser) and Android 3.2+ (Chrome) and of course
 all modern desktop browsers (IE9+ and later version of
@@ -31,11 +34,10 @@ IE9 may require edge settings:
       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
       ....
 
-## Examples ##
-
+## Examples
     // bind to a mouse click or tap event
     $( '#utap' ) .on( 'utap.utap',   onTap   );
-    
+
     // bind to a long-press event
     $( '#uheld' ).on( 'uheld.uheld', onHeld  );
 
@@ -60,8 +62,7 @@ IE9 may require edge settings:
       .bind('uheldend.uheldd',   onDragend   )
       ;
 
-## Motions ##
-
+## Motions
 The following motions are supported:
 
 - tap
@@ -75,29 +76,29 @@ so take care, especially with event delegation.  The example
 HTML should help point the way.
 
 
-### utap ###
+### utap
 A click or a tap event results in a `utap` event.
 - *Desktop* uses a *short-press Left Mouse Button [LMB]* motion.
 - *Touch* uses a *tap* motion.
 
-A click or a tap must be reside within a tolerance radius; 
+A click or a tap must be reside within a tolerance radius;
 otherwise it starts a drag event.  And it must be short in
 duration - otherwise the motion becomes a `uheld` event.
 
 You may configure the drag radius and the long-press
 durations.
 
-### uheld ###
+### uheld
 A long-press or long-hold event results in a `uheld` event.
 - *Desktop* uses a *long-press Left Mouse Button [LMB]* motion.
 - *Touch* uses a *long-touch* motion.
- 
+
 A `uheld` event is distinguished from a `utap` event by the duration
 of the press.  If the press short, the motion is a `utap`
-event; if the duration exceeds the configured threshold, a 
+event; if the duration exceeds the configured threshold, a
 `uheld` event is fired *immediately*.
 
-### drag ###
+### drag
 Dragging events.
 - *Desktop* uses a *LMB down - swipe - LMB up* motion
 - *Touch* uses a *swiping* motion.
@@ -108,7 +109,7 @@ There are three events:
 - `udragend`   - fires at the end of a drag (LMB up or finger release)
 
 
-### zoom ###
+### zoom
 Zooming events.
 - *Desktop* uses a *shift+LMB down - swipe - LMB up* motion.
 - *Touch* uses a *pinching* motion.
@@ -119,8 +120,7 @@ A zoom motion, like drag, actually consists of three events:
 - `uzoommove`  - fires as zoom amount changes
 - `uzoomend`   - fires at end of zoom motion
 
-## Event Attributes ##
-
+## Event Attributes
 These are the event object attributes:
 
 - `event.px_start_x` : position for x at start of motion
@@ -140,13 +140,11 @@ These are the event object attributes:
 - `ms_timestart` : start time of motion
 - `ms_timestop` : stop time of motion
 
-## Error handling ##
-
+## Error handling
 Like many other plugins, this code does not throw exceptions.
 Instead, it does its work quietly.
 
-## Namespacing ##
-
+## Namespacing
 Notice that jQuery event namespacing is fully supported.
 This works:
 
@@ -156,65 +154,60 @@ This works:
 
       $( '#msg' ).unbind( '.mytap' );
 
-## Use libraries instead of frameworks ##
-If you are considering using an SPA framework, I suggest
-you please read [Do you really want an SPA framework?][3]
-first.  
-
-## Release Notes ##
-### Copyright (c) ###
+## Release Notes
+### Copyright (c)
 2013 Michael S. Mikowski (mike[dot]mikowski[at]gmail[dotcom])
 
-### License ###
+### License
 Dual licensed under the MIT or GPL Version 2
 http://jquery.org/license
 
-### Version 0.3.1 ###
+### Version 0.3.1
 This is the first release registered with jQuery plugins.
 
-### Version 0.3.2 ###
+### Version 0.3.2
 Confirmed compatible with jQuery 1.7.0 through 1.9.1.
 
-### Versions 0.4.1-3 ###
+### Versions 0.4.1-3
 Updated documentation and npm release.
 
-### Versions 0.5.0-0.5.2 ###
+### Versions 0.5.0-0.5.2
 Updated docs, jslint compatibility, removed cruft, updated test page
 to include zoom support (shift + mb1 hold + mouse up/down ).
 
-### Versions 0.6.0 ###
+### Versions 0.6.0
 Fixed held logic, added `px_tdelta_x` and `px_tdelta_y` to attributes.
 Updated test page to include expected results.
 
-### Versions 0.6.1 ###
+### Versions 0.6.1
 The default `px_radius` parameter was doubled from 5px to 10px.  This made `utap`
 and `uheld` events work much better on smaller screens.  Confirmed compatible with
 with jQuery 2.1.4, thus 1.7.0 - 2.1.4 appear safe.
 
-### Versions 1.1.0-4 ###
+### Versions 1.1.0-4
 **No code changes.**  Updated npm keywords. Fixed typos.
 Bumped version number to represent maturity and stability.
 Redirected library discussion to blog post.
 
-### Testing ###
+### Testing
 I have tested with Android 3.2+ (Chrome only),
 iOS5+ Safari, Chrome 15+, Firefox 23, and IE 9+.
 
 The browser in Windows 8 RT has issues.
 
-## See also ##
+## See also
 The Hammer touch library, jQuery mobile.
 
-## TODO ##
+## TODO
 Support a wider range of motions
 
-## Contribute! ##
+## Contribute!
 If you want to help out, like all jQuery plugins this is hosted at
 GitHub.  Any improvements or suggestions are welcome!
 You can reach me at mike[dot]mikowski[at]gmail[dotcom].
 
-## END ##
+## End
+[0]:http://mmikowski.github.io/no-frameworks
 [1]:http://www.amazon.com/dp/1617290750
 [2]:http://manning.com/mikowski
-[3]:http://mmikowski.github.io/no-frameworks
 
