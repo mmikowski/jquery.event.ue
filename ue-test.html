@@ -303,7 +303,9 @@ $(document).ready( function() {
       max_z_index  : 1,
       zoom_num     : 1000,
       px_drag_top  : undefined,
-      px_drag_left : undefined
+      px_drag_left : undefined,
+      origin_x_px  : $(document.body).width()  / 2,
+      origin_y_px  : $(document.body).height() / 2
     },
     onTap,      onHeld,
     onZoomstart, onZoommove, onZoomend,
@@ -376,6 +378,7 @@ $(document).ready( function() {
   onDragmove = function ( event ){
     var
       $this = $(this),
+      scale_num = 1000 / stateMap.zoom_num,
       offset_map
       ;
 
@@ -383,11 +386,14 @@ $(document).ready( function() {
 
     if ( stateMap.px_drag_top === undefined ){
       offset_map = $this.offset();
-      stateMap.px_drag_top  = offset_map.top  - 23;
-      stateMap.px_drag_left = offset_map.left - 23;
+      // scale to origin
+      stateMap.px_drag_top  = ( offset_map.top - stateMap.origin_y_px ) * scale_num 
+        + stateMap.origin_y_px - ( 23 * scale_num );
+      stateMap.px_drag_left  = ( offset_map.left - stateMap.origin_x_px ) * scale_num 
+        + stateMap.origin_x_px - ( 23 * scale_num );
     }
-    stateMap.px_drag_top  += event.px_delta_y;
-    stateMap.px_drag_left += event.px_delta_x;
+    stateMap.px_drag_top  += ( event.px_delta_y * scale_num );
+    stateMap.px_drag_left += ( event.px_delta_x * scale_num );
 
     $this.css({ top : stateMap.px_drag_top, left : stateMap.px_drag_left });
   };

@@ -360,9 +360,11 @@
 
     // :input selector includes text areas
     if ( $target.is( option_map.ignore_class ) ) { return; }
+    
+    // Prevent default only after confirming handling this event
+    event_src.preventDefault();
 
     cb_map = callbackList.pop();
-
     while ( cb_map ) {
       if ( $target.is( cb_map.selector_str )
         || $( arg_map.elem ).is( cb_map.selector_str )
@@ -451,6 +453,9 @@
       ;
 
     if ( ! motionMapMap[ motion_id ] ) { return; }
+
+    // Prevent default only after confirming handling this event
+    event_src.preventDefault();
 
     motion_map   = motionMapMap[motion_id];
     option_map   = motion_map.option_map;
@@ -687,14 +692,8 @@
     event.timeStamp = timestamp;
 
     switch ( event.type ) {
-      case 'touchstart' :
-        handler_fn = fnMotionStart;
-        event.preventDefault();
-      break;
-      case 'touchmove'  :
-        handler_fn = fnMotionMove;
-        event.preventDefault();
-      break;
+      case 'touchstart' : handler_fn = fnMotionStart; break;
+      case 'touchmove'  : handler_fn = fnMotionMove;  break;
       case 'touchend'    :
       case 'touchcancel' : handler_fn = fnMotionEnd;   break;
       default : handler_fn = null;
@@ -744,10 +743,7 @@
     switch ( event.type ) {
       case 'mousedown' : handler_fn = fnMotionStart; break;
       case 'mouseup'   : handler_fn = fnMotionEnd;   break;
-      case 'mousemove' :
-        handler_fn = fnMotionMove;
-        event.preventDefault();
-      break;
+      case 'mousemove' : handler_fn = fnMotionMove;  break;
       default          : handler_fn = null;
     }
 
