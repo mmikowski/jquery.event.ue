@@ -22,18 +22,20 @@ and should not be draggable, with the one exception being **held+helddrag**.
 Compatible with jQuery 1.7.0+.
 
 ## Browser Support
-This was originally written in 2012 and has changed occassionaly since.
-Works with iOS5+ (Stock browser) and Android 3.2+ (Chrome) and of course
-all modern desktop browsers (IE9+ and later version of
-Chrome, Safari, and Firefox.
+This was originally written in 2012 and has been updated regularly in 2015 and
+2016.  Works with iOS5+ (Stock browser) and Android 3.2+ (Chrome) and of course
+all modern desktop browsers - IE9+ and later version of Chrome, Safari, and Firefox.
 
-IE9 may require edge settings:
+IE9 requires edge settings:
 
-    <html>
-    <head>
-      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      ....
+```html
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  ....
+```
 
+````js
 ## Examples
     // bind to a mouse click or tap event
     $( '#utap' ) .on( 'utap.utap',   onTap   );
@@ -61,6 +63,7 @@ IE9 may require edge settings:
       .bind('uheldmove.uheldd',  onDragmove  )
       .bind('uheldend.uheldd',   onDragend   )
       ;
+```
 
 ## Motions
 The following motions are supported:
@@ -71,12 +74,11 @@ The following motions are supported:
 - long-press drag start, move, and end
 - zoom start, zoom move, zoom end
 
-Notice the event object is a little different,
-so take care, especially with event delegation.  The example
-HTML should help point the way.
+Notice the event object is a little different, so take care, 
+especially with event delegation - target is currently different.
+The example HTML should help point the way.
 
-
-### utap
+### Taps
 A click or a tap event results in a `utap` event.
 - *Desktop* uses a *short-press Left Mouse Button [LMB]* motion.
 - *Touch* uses a *tap* motion.
@@ -88,7 +90,7 @@ duration - otherwise the motion becomes a `uheld` event.
 You may configure the drag radius and the long-press
 durations.
 
-### uheld
+### Long-press
 A long-press or long-hold event results in a `uheld` event.
 - *Desktop* uses a *long-press Left Mouse Button [LMB]* motion.
 - *Touch* uses a *long-touch* motion.
@@ -98,7 +100,7 @@ of the press.  If the press short, the motion is a `utap`
 event; if the duration exceeds the configured threshold, a
 `uheld` event is fired *immediately*.
 
-### drag
+### Drag
 Dragging events.
 - *Desktop* uses a *LMB down - swipe - LMB up* motion
 - *Touch* uses a *swiping* motion.
@@ -109,7 +111,7 @@ There are three events:
 - `udragend`   - fires at the end of a drag (LMB up or finger release)
 
 
-### zoom
+### Zoom
 Zooming events.
 - *Desktop* uses a *shift+LMB down - swipe - LMB up* motion.
 - *Touch* uses a *pinching* motion.
@@ -148,11 +150,13 @@ Instead, it does its work quietly.
 Notice that jQuery event namespacing is fully supported.
 This works:
 
-      $( '#msg' )
-        .on( 'utap.mytap',  onTapMsg  )
-        .on( 'uheld.mytap', onHeldMsg );
+```js
+$( '#msg' )
+  .on( 'utap.mytap',  onTapMsg  )
+  .on( 'uheld.mytap', onHeldMsg );
 
-      $( '#msg' ).unbind( '.mytap' );
+$( '#msg' ).unbind( '.mytap' );
+```
 
 ## Release Notes
 ### Copyright (c)
@@ -162,38 +166,40 @@ This works:
 Dual licensed under the MIT or GPL Version 2
 http://jquery.org/license
 
-### Version 0.3.1
-This is the first release registered with jQuery plugins.
 
-### Version 0.3.2
-Confirmed compatible with jQuery 1.7.0 through 1.9.1.
+### Version  1.1.9
+Stopped preventDefault() from firing on events not controlled by the plugin.
+Updated tests to handle zooming correctly.
 
-### Versions 0.4.1-3
-Updated documentation and npm release.
-
-### Versions 0.5.0-0.5.2
-Updated docs, jslint compatibility, removed cruft, updated test page
-to include zoom support (shift + mb1 hold + mouse up/down ).
-
-### Versions 0.6.0
-Fixed held logic, added `px_tdelta_x` and `px_tdelta_y` to attributes.
-Updated test page to include expected results.
+### Versions 1.0.x
+**No code changes.**  Updated npm keywords. Fixed typos.
+Bumped version number to represent maturity and stability.
+Redirected library discussion to blog post.
 
 ### Versions 0.6.1
 The default `px_radius` parameter was doubled from 5px to 10px.  This made `utap`
 and `uheld` events work much better on smaller screens.  Confirmed compatible with
 with jQuery 2.1.4, thus 1.7.0 - 2.1.4 appear safe.
 
-### Versions 1.1.0-4
-**No code changes.**  Updated npm keywords. Fixed typos.
-Bumped version number to represent maturity and stability.
-Redirected library discussion to blog post.
+### Versions 0.6.0
+Fixed held logic, added `px_tdelta_x` and `px_tdelta_y` to attributes.
+Updated test page to include expected results.
+
+### Versions 0.5.0-0.5.2
+Updated docs, jslint compatibility, removed cruft, updated test page
+to include zoom support (shift + mb1 hold + mouse up/down ).
+
+### Versions 0.4.1-3
+Updated documentation and npm release.
+
+### Version 0.3.2
+Confirmed compatible with jQuery 1.7.0 through 1.9.1.
+
+### Version 0.3.1
+First release registered with jQuery plugins.
 
 ### Testing
-I have tested with Android 3.2+ (Chrome only),
-iOS5+ Safari, Chrome 15+, Firefox 23, and IE 9+.
-
-The browser in Windows 8 RT has issues.
+Tested with Android 3.2 Chrome, iOS5+ Safari, Chrome 15+, Firefox 23, and IE 9+.
 
 ## See also
 The Hammer touch library, jQuery mobile.

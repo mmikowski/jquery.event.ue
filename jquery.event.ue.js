@@ -360,7 +360,7 @@
 
     // :input selector includes text areas
     if ( $target.is( option_map.ignore_class ) ) { return; }
-    
+
     // Prevent default only after confirming handling this event
     event_src.preventDefault();
 
