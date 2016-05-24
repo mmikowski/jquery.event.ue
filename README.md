@@ -166,12 +166,17 @@ $( '#msg' ).unbind( '.mytap' );
 Dual licensed under the MIT or GPL Version 2
 http://jquery.org/license
 
+### Version  1.2.0
+Changed default option key "ignore_class" to "ignore_select"
+  and it now defaults to "" instead of ":input"
 
-### Version  1.1.9
-Stopped preventDefault() from firing on events not controlled by the plugin.
+### Version 1.1.9 
 Updated tests to handle zooming correctly.
 
-### Versions 1.0.x
+### Version  1.1.8
+Stopped preventDefault() from firing on events not controlled by the plugin.
+
+### Versions 1.1.0-7
 **No code changes.**  Updated npm keywords. Fixed typos.
 Bumped version number to represent maturity and stability.
 Redirected library discussion to blog post.

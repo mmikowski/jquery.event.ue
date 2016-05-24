@@ -8,22 +8,26 @@
  * http://jquery.org/license
  *
  * Versions
+ *  1.2.0   - ignore_class => ignore_select, now defaults to ''
+ *  1.1.9   - Fixed ue-test.html demo to scale properly
+ *  1.1.8   - Removed prevent default from non-ue events
+ *  1.1.7   - Corrected desktop zoom motion description
+ *  1.1.0-5 - No code changes. Updated npm keywords. Fixed typos.
+ *            Bumped version to represent maturity and stability.
+ *  0.6.1   - Change px_radius from 5 to 10 pixels
+ *  0.6.0   - Added px_tdelta_x and px_tdelta_y for deltas from start
+ *          - Fixed onheld and drag conflicts
+ *  0.5.0   - Updated docs, removed cruft, updated for jslint,
+ *            updated test page (zoom)
+ *  0.4.3   - Removed fatal execption possibility if originalEvent
+ *            is not defined on event object
+ *  0.4.2   - Updated documentation
+ *  0.3.2   - Updated to jQuery 1.9.1.
+ *            Confirmed 1.7.0-1.9.1 compatibility.
+ *  0.3.1   - Change for jQuery plugins site
  *  0.3.0   - Initial jQuery plugin site release
  *          - Replaced scrollwheel zoom with drag motion.
  *            This resolved a conflict with scrollable areas.
- *  0.3.1   - Change for jQuery plugins site
- *  0.3.2   - Updated to jQuery 1.9.1.
- *            Confirmed 1.7.0-1.9.1 compatibility.
- *  0.4.2   - Updated documentation
- *  0.4.3   - Removed fatal execption possibility if originalEvent
- *            is not defined on event object
- *  0.5.0   - Updated docs, removed cruft, updated for jslint,
- *            updated test page (zoom)
- *  0.6.0   - Added px_tdelta_x and px_tdelta_y for deltas from start
- *          - Fixed onheld and drag conflicts
- *  0.6.1   - Default px_radius now 10 pixels
- *  1.1.0-5 - No code changes. Updated npm keywords. Fixed typos.
- *            Bumped version to represent maturity and stability.
  *
 */
 
@@ -37,7 +41,7 @@
 (function ( $ ) {
   //---------------- BEGIN MODULE SCOPE VARIABLES --------------
   var
-    $Special        = $.event.special,  // shortcut for special event
+    $Special  = $.event.special,  // shortcut for special event
     motionMapMap    = {},         // map of pointer motions by cursor
     isMoveBound     = false,      // flag if move handlers bound
     pxPinchZoom     = -1,         // distance between pinch-zoom points
@@ -47,10 +51,11 @@
       bound_ns_map  : {},         // namspace hash e.g. bound_ns_map.utap.fred
       wheel_ratio   : 15,         // multiplier for mousewheel delta
       px_radius     : 10,         // 'distance' dragged before dragstart
-      ignore_class  : ':input',   // 'not' suppress matching elements
+      ignore_select : '',         // selector of elements to ignore (e.g. :input)
       tap_time      : 200,        // millisecond max time to consider tap
       held_tap_time : 300         // millisecond min time to consider taphold
     },
+
     callbackList  = [],           // global callback stack
     zoomMouseNum  = 1,            // multiplier for mouse zoom
     zoomTouchNum  = 4,            // multiplier for touch zoom
@@ -211,7 +216,7 @@
 
       namespace_list = namespace_str.split('.');
 
-      for ( idx = 0; idx < namespace_list.length; idx += 1 ) {
+      for ( idx = 0; idx < namespace_list.length; idx++ ) {
         namespace_key = namespace_list[idx];
         bound_ns_map[event_type][namespace_key] = true;
       }
@@ -242,7 +247,7 @@
       // complete record.
       namespace_list = namespace_str.split('.');
 
-      for ( idx = 0; idx < namespace_list.length; idx += 1 ) {
+      for ( idx = 0; idx < namespace_list.length; idx++ ) {
         namespace_key = namespace_list[idx];
         if (bound_ns_map[event_type][namespace_key]) {
           delete bound_ns_map[event_type][namespace_key];
@@ -356,10 +361,11 @@
     // this should never happen, but it does
     if ( motionMapMap[ motion_id ] ) { return; }
 
+    // ignore on zoom
     if ( request_dzoom && ! bound_ns_map.uzoomstart ) { return; }
 
     // :input selector includes text areas
-    if ( $target.is( option_map.ignore_class ) ) { return; }
+    if ( $target.is( option_map.ignore_select ) ) { return; }
 
     // Prevent default only after confirming handling this event
     event_src.preventDefault();
