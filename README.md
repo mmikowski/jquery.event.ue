@@ -157,7 +157,7 @@ $( '#msg' ).unbind( '.mytap' );
 
 ## Release Notes
 ### Copyright (c)
-2013 Michael S. Mikowski (mike[dot]mikowski[at]gmail[dotcom])
+2013-2016 Michael S. Mikowski (mike[dot]mikowski[at]gmail[dotcom])
 
 ### License
 Dual licensed under the MIT or GPL Version 2
