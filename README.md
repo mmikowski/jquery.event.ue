@@ -22,11 +22,8 @@ and should not be draggable, with the one exception being **held+helddrag**.
 Compatible with jQuery 1.7.0+.
 
 ## Browser Support
-This was originally written in 2012 and has been updated regularly in 2015 and
-2016.  Works with iOS5+ (Stock browser) and Android 3.2+ (Chrome) and of course
-all modern desktop browsers - IE9+ and later version of Chrome, Safari, and Firefox.
-
-IE9 requires edge settings:
+Works with all modern browsers: c. 2012+ version of Chrome, Firefox, Safari,
+and IE9+.  IE9 requires edge settings:
 
 ```html
 <html>
@@ -35,8 +32,8 @@ IE9 requires edge settings:
   ....
 ```
 
-````js
 ## Examples
+```js
     // bind to a mouse click or tap event
     $( '#utap' ) .on( 'utap.utap',   onTap   );
 
