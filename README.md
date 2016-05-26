@@ -1,29 +1,36 @@
 # jquery.event.ue
-## Use libraries, not frameworks
-This is a library that strives to be best-in-class.
-If you are considering using an SPA framework, please read [Do you
-really want an SPA framework?][0] first.
 
 ## Summary
-Support both Touch and Desktop interfaces using the same event handlers, including tap (click), long-press, drag, long-press-drag, and pinch/mouse zoom. It is used in commercial SPAs and is featured in the best-selling book [Single Page Web Applications - JavaScript end-to-end][1] which is also [available directly from Manning][2].
+Use this **u**nified **e**vent plugin to applications that easily and seamlessly support 
+mobile (touch) **and** desktop (mouse) environments. 
 
-Supported motions for both desktop and touch devices include:
+The plugin provides events that recognizes mouse, keyboard, and touch motions that have 
+identical *intent* and publishes a single unified event for each. For example, a long-press 
+*intent* on a desktop is expressed by a *motion* where a user clicks on the LMB for over 
+0.5s without substantially moving the mouse.  A long-press *intent* on a phone or tablet
+is expressed by a *motion* where a user touches on a screen for over 0.5s without 
+substantially moving the touch point. This plugin recognizes the identical *intents* and 
+publishes the same `uheld` event for either. It does so for many *intents*:
 
-- tap
-- long-press
-- drag
-- long-press drag
-- zoom
+- click (tap)
+- long-press (long-tap)
+- drag (swipe)
+- long-press-drag (long-press-swipe)
+- zoom (pinch-to-zoom)
 
-Please see the `ue-test.html` file for a demonstration of the different
-motions.  Most test tiles below the second row are negative test cases
-and should not be draggable.
+This plugin is used in multiple commercial SPAs and is featured in the best-selling book 
+[Single Page Web Applications - JavaScript end-to-end][1], also [available on Amazon][2].
 
-Compatible with jQuery 1.7.0+.
+Please see the `ue-test.html` file for a demonstration of the different intents. Expected 
+behavior is expressed in the BR corner of the tiles. If you see any unexpected behavior 
+while testing motions on your device please file a bug report so I can fix it.
+
+This plugin is designed to work with jQuery 1.7.0+, and has been tested on most jQuery 
+versions through 2.1.4.
 
 ## Browser Support
-Works with all modern browsers: Chrome, Firefox, Safari, and IE9+.
-IE9 requires edge settings:
+This plugin works with the latest versions of popular browsers: 
+Chrome 15+, Firefox 23+, Safari 5+, and IE 9+. IE9 requires edge settings:
 
 ```html
   <head><meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -60,87 +67,98 @@ IE9 requires edge settings:
       ;
 ```
 
-## Motions
-The following motions are supported:
+## Intents
+The following *intents* are supported:
 
-- tap
-- long-hold
-- drag: start, move, end
-- long-hold-drag: start, move, end
-- zoom: start, move, end
+- click (tap)
+- long-press (long-tap)
+- drag (swipe): start, move, end
+- long-press-drag (long-press-swipe): start, move, end
+- zoom (pinch-to-zoom): start, move, end
 
 See the `ue-test.html` file for example use of the 
 event object.
 
-### Tap
-A click or a tap motion results in a `utap` event.
-- *Desktop* uses a *short-press Left Mouse Button [LMB]* motion.
-- *Touch* uses a *tap* motion.
+### The click intent
+A click *intent* results in a `utap` event.
+- The *Desktop* motion is *Left Mouse Button [LMB] down-up*
+  where the mouse-down time is less than the tap tolerance and
+  the location movement is less than the drag tolerance.
+- The *Touch* motion is *touchstart-move-end* where
+  the touch time is less than the tap tolerance and the location
+  movement is less than the drag tolerance.
 
-A click or a tap must be reside within a tolerance radius;
-otherwise it starts a drag event. It must also be short in
-duration; otherwise it becomes a long-hold event.
-
-You may tweak the tap, drag, and long-hold tolerances
-in the `defaultOptMap` at the top of the lib.  The API will have
+You may tweak the tap, drag, and long-press tolerances
+in the `defaultOptMap` at the top of the lib. The API will have
 a method to change these values in the future.
 
-### Long-hold
-A long-hold motion results in a `uheld` event.
-- *Desktop* uses a *long-press Left Mouse Button [LMB]* motion.
-- *Touch* uses a *long-touch* motion.
+### The long-press intent
+A long-press *intent* results in a `uheld` event.
+- The *Desktop* motion is *Left Mouse Button [LMB] down-up*
+  where the mouse-down time exceeds the long-press tolerance and
+  the location movement is less than the drag tolerance.
+- The *Touch* motion is *touchstart-move-end* where 
+  the touch time exceeds the long-press tolerance and
+  the location movement is less than the drag tolerance.
 
-Long-hold motion is distinguished from a tap by the duration
-of the press.  A `uheld` event is triggered when a press duration
-exceeds the long-hold tolerance.
-
-### Drag
-A drag motion results in a single `udragstart` event, one or more
+### The drag intent
+A drag *intent* results in a single `udragstart` event, one or more
 `udragmove` events, and a final `udragend` event.
+- The *Desktop* motion is *LMB down - mouse-move - LMB up*
+  where the mouse-down time exceeds the tap tolerance and 
+  the location movement is greater than the drag tolerance.
+- The *Touch* is *touchstart-move-end*, where 
+  the touch time is exceeds the tap tolerance and
+  the location movement is less than the drag tolerance.
 
-- *Desktop* uses a *LMB down - swipe - LMB up* motion
-- *Touch* uses a *swiping* motion.
-
-Event details:
+Event order:
 - `udragstart` - fires at the start of a drag (LMB down or finger press where motion has moved out of the drag radius)
 - `udragmove`  - fires each time the mouse or finger moves
 - `udragend`   - fires at the end of a drag (LMB up or finger release)
 
-### Zoom
-A zoom motion results in a single 'uzoomstart` event, one or more
+### The zoom intent
+A zoom *intent* results in a single `uzoomstart` event, one or more
 `uzoommove` events, and a final `uzoomend` event.
 
-- *Desktop* uses a *shift+LMB down - swipe - LMB up* motion.
-- *Touch* uses a *pinching* motion.
+- The *Desktop* motion is *shift+LMB down - move-mouse - LMB up* where
+  the mouse-down time exceeds the tap tolerance and
+  the location movement is greater than the drag tolerance.
+- The *Touch* motion is *two-point-touch - point-move - two-point-release*.
 
-Event details:
+Event order:
 - `uzoomstart` - fires at the start of zoom
 - `uzoommove`  - fires as zoom amount changes
 - `uzoomend`   - fires at end of zoom motion
 
 ## Event Attributes
-The event object includes these attributes in addition to those already
-provided by jQuery:
+The event object for all **ue** events include these attributes in addition 
+to those already provided by jQuery:
 
-- `event.px_start_x` : position for x at start of motion
-- `event.px_start_y` : ibid y
-- `event.px_current_x` : current x position
-- `event.px_current_y` : ibid y
-- `event.px_end_x` : position for x at end of motion
-- `event.px_end_y` : ibid y
-- `event.px_delta_zoom`: the delta in zoom since start of motion
-- `event.px_delta_x` : the delta in x position since start of motion
-- `event.px_delta_y` : ibid y
-- `event.orig_target` : element under cursor at start of motion
-- `event.elem_bound` : element on which event was bound
-- `event.elem_target` : element under the cursor (used for event delegation)
-- `event.timeStamp`
-- `event.ms_elapsed` : elapsed time since start of motion
-- `ms_timestart` : start time of motion
-- `ms_timestop` : stop time of motion
+```js
+var attr_list = [
+  event.px_start_x,    // X-position at start of motion
+  event.px_start_y,    // Y-ibid
+  event.px_current_x,  // X-position, current
+  event.px_current_y,  // Y-ibid
+  event.px_end_x,      // X-position for x at end of motion
+  event.px_end_y,      // Y-ibid
+  event.px_delta_zoom, // Zoom delta since last motion event
+  event.px_delta_x,    // X-ibid
+  event.px_delta_y,    // Y-ibid
+  event.px_tdelta_x,   // X-delta since beginning of motion
+  event.px_tdelta_y,   // Y-ibid
+  event.orig_target,   // Element under cursor at start of motion
+  event.elem_bound,    // Element on which event was bound
+  event.elem_target,   // Element under the cursor for *this* event
+  event.timeStamp,     // Timestamp of this event
+  event.ms_elapsed,    // Elapsed time since start of motion
+  event.ms_timestart,  // Start time of motion
+  event.ms_timestop,   // top time of motion
+];
+```
 
 ## Error handling
-This code does not throw exceptions.
+This code ignores bad input, and does not throw exceptions.  As JS implementations are (finally) seeing improved exception handling, expect this to change in 2.x.
 
 ## Namespacing
 jQuery event namespacing is fully supported, as shown in this example:
@@ -152,21 +170,26 @@ $( '#msg' )
 
 $( '#msg' ).unbind( '.mytap' );
 ```
+## Use libraries, not frameworks
+This is a library that strives to be best-in-class.
+If you are considering using an SPA framework, please read [Do you
+really want an SPA framework?][0] first.
 
 ## Release Notes
 ### Copyright (c) 2013-2016
-2013-2016 Michael S. Mikowski (mike[dot]mikowski[at]gmail[dotcom])
+Michael S. Mikowski (mike[dot]mikowski[at]gmail[dotcom])
 
 ### License
 Dual licensed under the MIT or GPL Version 2
 http://jquery.org/license
 
-### Version  1.2.0-3
-Changed default option key "ignore_class" to "ignore_select"
-  and it now defaults to "" instead of ":input"
+### Version  1.2.0-4
+- Changed default option key "ignore\_class" to "ignore\_select".
+- The value is now "" instead of ":input"
+- Updated README and published to npm (1.2.4)
 
 ### Version 1.1.9 
-Updated tests to handle zooming correctly.
+Updated `ue-test.html` to handle zooming correctly.
 
 ### Version  1.1.8
 Stopped preventDefault() from firing on events not controlled by the plugin.
@@ -205,7 +228,7 @@ Tested with Android 3.2 Chrome, iOS5+ Safari, Chrome 15+, Firefox 23, and IE 9+.
 The Hammer touch library, jQuery mobile.
 
 ## TODO
-Support a wider range of motions
+Support a wider range of *intents*
 
 ## Contribute!
 If you want to help out, like all jQuery plugins this is hosted at
@@ -214,6 +237,7 @@ You can reach me at mike[dot]mikowski[at]gmail[dotcom].
 
 ## End
 [0]:http://mmikowski.github.io/no-frameworks
-[1]:http://www.amazon.com/dp/1617290750
-[2]:http://manning.com/mikowski
+[1]:https://www.manning.com/books/single-page-web-applications
+[2]:http://www.amazon.com/dp/1617290750
+
 
