@@ -41,19 +41,19 @@
 (function ( $ ) {
   //---------------- BEGIN MODULE SCOPE VARIABLES --------------
   var
-    $Special  = $.event.special,  // shortcut for special event
-    motionMapMap    = {},         // map of pointer motions by cursor
-    isMoveBound     = false,      // flag if move handlers bound
-    pxPinchZoom     = -1,         // distance between pinch-zoom points
-    optionKey       = 'ue_bound', // data key for storing options
-    doDisableMouse  = false,      // flag to discard mouse input
-    defaultOptMap   = {           // Default option hash
-      bound_ns_map  : {},         // namspace hash e.g. bound_ns_map.utap.fred
-      wheel_ratio   : 15,         // multiplier for mousewheel delta
-      px_radius     : 10,         // 'distance' dragged before dragstart
-      ignore_select : '',         // selector of elements to ignore (e.g. :input)
-      tap_time      : 200,        // millisecond max time to consider tap
-      held_tap_time : 300         // millisecond min time to consider taphold
+    $Special  = $.event.special,  // Shortcut for special event
+    motionMapMap    = {},         // Map of pointer motions by cursor
+    isMoveBound     = false,      // Flag if move handlers bound
+    pxPinchZoom     = -1,         // Distance between pinch-zoom points
+    optionKey       = 'ue_bound', // Data key for storing options
+    doDisableMouse  = false,      // Flag to discard mouse input
+    defaultOptMap   = {           // Default option map
+      bound_ns_map  : {},         // Map of bound namespaces e.g.
+                                  // bound_ns_map.utap.fred
+      px_radius     : 10,         // Tolerated distance before dragstart
+      ignore_select : '',         // Selector of elements to ignore (e.g. :input)
+      max_tap_ms    : 200,        // Maximum time allowed for tap
+      min_held_ms   : 300         // Minimum time require for long-press
     },
 
     callbackList  = [],           // global callback stack
@@ -440,7 +440,7 @@
             bound_ns_map : bound_ns_map
           });
         },
-        option_map.held_tap_time
+        option_map.min_held_ms
       );
     }
   };
@@ -494,7 +494,7 @@
     }
 
     // disallow tap if time has elapsed 
-    if ( motion_map.ms_elapsed > option_map.tap_time) {
+    if ( motion_map.ms_elapsed > option_map.max_tap_ms ) {
       motion_map.do_allow_tap = false;
     }
 
@@ -618,7 +618,7 @@
 
     // trigger utap
     if ( bound_ns_map.utap
-      && motion_map.ms_elapsed <= option_map.tap_time
+      && motion_map.ms_elapsed <= option_map.max_tap_ms
       && motion_map.do_allow_tap
     ) {
       event_ue = $.Event('utap');

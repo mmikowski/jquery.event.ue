@@ -17,28 +17,26 @@ Supported motions for both desktop and touch devices include:
 
 Please see the `ue-test.html` file for a demonstration of the different
 motions.  Most test tiles below the second row are negative test cases
-and should not be draggable, with the one exception being **held+helddrag**.
+and should not be draggable.
 
 Compatible with jQuery 1.7.0+.
 
 ## Browser Support
-Works with all modern browsers: c. 2012+ version of Chrome, Firefox, Safari,
-and IE9+.  IE9 requires edge settings:
+Works with all modern browsers: Chrome, Firefox, Safari, and IE9+.
+IE9 requires edge settings:
 
 ```html
-<html>
-<head>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <head><meta http-equiv="X-UA-Compatible" content="IE=edge" />
   ....
 ```
 
 ## Examples
 ```js
     // bind to a mouse click or tap event
-    $( '#utap' ) .on( 'utap.utap',   onTap   );
+    $( '#utap' ) .on( 'utap',  onTap   );
 
     // bind to a long-press event
-    $( '#uheld' ).on( 'uheld.uheld', onHeld  );
+    $( '#uheld' ).on( 'uheld', onHeld  );
 
     // bind to zoom events
     $( '#uzoom' )
@@ -49,16 +47,16 @@ and IE9+.  IE9 requires edge settings:
 
     // bind to drag events
     $( '#udrag' )
-      .bind( 'udragstart.udrag', onDragstart )
-      .bind( 'udragmove.udrag',  onDragmove  )
-      .bind( 'udragend.udrag',   onDragend   )
+      .bind( 'udragstart', onDragstart )
+      .bind( 'udragmove',  onDragmove  )
+      .bind( 'udragend',   onDragend   )
       ;
 
     // bind to hold-drag events
     $('#uhelddrag')
-      .bind('uheldstart.uheldd', onDragstart )
-      .bind('uheldmove.uheldd',  onDragmove  )
-      .bind('uheldend.uheldd',   onDragend   )
+      .bind('uheldstart', onDragstart )
+      .bind('uheldmove',  onDragmove  )
+      .bind('uheldend',   onDragend   )
       ;
 ```
 
@@ -66,61 +64,63 @@ and IE9+.  IE9 requires edge settings:
 The following motions are supported:
 
 - tap
-- long-press
-- drag start, drag move, drag end
-- long-press drag start, move, and end
-- zoom start, zoom move, zoom end
+- long-hold
+- drag: start, move, end
+- long-hold-drag: start, move, end
+- zoom: start, move, end
 
-Notice the event object is a little different, so take care, 
-especially with event delegation - target is currently different.
-The example HTML should help point the way.
+See the `ue-test.html` file for example use of the 
+event object.
 
-### Taps
-A click or a tap event results in a `utap` event.
+### Tap
+A click or a tap motion results in a `utap` event.
 - *Desktop* uses a *short-press Left Mouse Button [LMB]* motion.
 - *Touch* uses a *tap* motion.
 
 A click or a tap must be reside within a tolerance radius;
-otherwise it starts a drag event.  And it must be short in
-duration - otherwise the motion becomes a `uheld` event.
+otherwise it starts a drag event. It must also be short in
+duration; otherwise it becomes a long-hold event.
 
-You may configure the drag radius and the long-press
-durations.
+You may tweak the tap, drag, and long-hold tolerances
+in the `defaultOptMap` at the top of the lib.  The API will have
+a method to change these values in the future.
 
-### Long-press
-A long-press or long-hold event results in a `uheld` event.
+### Long-hold
+A long-hold motion results in a `uheld` event.
 - *Desktop* uses a *long-press Left Mouse Button [LMB]* motion.
 - *Touch* uses a *long-touch* motion.
 
-A `uheld` event is distinguished from a `utap` event by the duration
-of the press.  If the press short, the motion is a `utap`
-event; if the duration exceeds the configured threshold, a
-`uheld` event is fired *immediately*.
+Long-hold motion is distinguished from a tap by the duration
+of the press.  A `uheld` event is triggered when a press duration
+exceeds the long-hold tolerance.
 
 ### Drag
-Dragging events.
+A drag motion results in a single `udragstart` event, one or more
+`udragmove` events, and a final `udragend` event.
+
 - *Desktop* uses a *LMB down - swipe - LMB up* motion
 - *Touch* uses a *swiping* motion.
 
-There are three events:
+Event details:
 - `udragstart` - fires at the start of a drag (LMB down or finger press where motion has moved out of the drag radius)
 - `udragmove`  - fires each time the mouse or finger moves
 - `udragend`   - fires at the end of a drag (LMB up or finger release)
 
-
 ### Zoom
-Zooming events.
+A zoom motion results in a single 'uzoomstart` event, one or more
+`uzoommove` events, and a final `uzoomend` event.
+
 - *Desktop* uses a *shift+LMB down - swipe - LMB up* motion.
 - *Touch* uses a *pinching* motion.
 
-A zoom motion, like drag, actually consists of three events:
-
+Event details:
 - `uzoomstart` - fires at the start of zoom
 - `uzoommove`  - fires as zoom amount changes
 - `uzoomend`   - fires at end of zoom motion
 
 ## Event Attributes
-These are the event object attributes:
+The event object includes these attributes in addition to those already
+provided by jQuery:
 
 - `event.px_start_x` : position for x at start of motion
 - `event.px_start_y` : ibid y
@@ -140,12 +140,10 @@ These are the event object attributes:
 - `ms_timestop` : stop time of motion
 
 ## Error handling
-Like many other plugins, this code does not throw exceptions.
-Instead, it does its work quietly.
+This code does not throw exceptions.
 
 ## Namespacing
-Notice that jQuery event namespacing is fully supported.
-This works:
+jQuery event namespacing is fully supported, as shown in this example:
 
 ```js
 $( '#msg' )
@@ -156,14 +154,14 @@ $( '#msg' ).unbind( '.mytap' );
 ```
 
 ## Release Notes
-### Copyright (c)
+### Copyright (c) 2013-2016
 2013-2016 Michael S. Mikowski (mike[dot]mikowski[at]gmail[dotcom])
 
 ### License
 Dual licensed under the MIT or GPL Version 2
 http://jquery.org/license
 
-### Version  1.2.0
+### Version  1.2.0-3
 Changed default option key "ignore_class" to "ignore_select"
   and it now defaults to "" instead of ":input"
 
