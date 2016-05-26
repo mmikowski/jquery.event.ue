@@ -1,11 +1,11 @@
 # jquery.event.ue
 
 ## Summary
-Use this **u**nified **e**vent plugin to applications that easily and seamlessly support 
+Use this **unified event** plugin to applications that easily and seamlessly support 
 mobile (touch) **and** desktop (mouse) environments. 
 
-The plugin provides events that recognizes mouse, keyboard, and touch motions that have 
-identical *intent* and publishes a single unified event for each. For example, a long-press 
+The plugin recognizes mouse, keyboard, and touch motions that have 
+identical *intent* and publishes a single **unified event** for each. For example, a long-press 
 *intent* on a desktop is expressed by a *motion* where a user clicks on the LMB for over 
 0.5s without substantially moving the mouse.  A long-press *intent* on a phone or tablet
 is expressed by a *motion* where a user touches on a screen for over 0.5s without 
