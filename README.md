@@ -1,35 +1,39 @@
 # jquery.event.ue
 
 ## Summary
-Use this **unified event** plugin to applications that easily and seamlessly support 
-mobile (touch) **and** desktop (mouse) environments. 
+Use this **unified event** plugin to applications that easily and seamlessly
+support mobile (touch) **and** desktop (mouse) environments. 
 
 The plugin recognizes mouse, keyboard, and touch motions that have 
-identical *intent* and publishes a single **unified event** for each. For example, a long-press 
-*intent* on a desktop is expressed by a *motion* where a user clicks on the LMB for over 
-0.5s without substantially moving the mouse.  A long-press *intent* on a phone or tablet
-is expressed by a *motion* where a user touches on a screen for over 0.5s without 
-substantially moving the touch point. This plugin recognizes the identical *intents* and 
-publishes the same `uheld` event for either. It does so for many *intents*:
+the same **intent** and publishes **unified events** for them. For example,
+a long-press **intent** is expressed with a mouse by pressing-and-holding
+on the left mouse button for over half a second without substantially moving
+the mouse.  The same **intent** on a touch device is expressed by placing a
+finger on the screen for over half a second without substantially moving the
+finger.  This pugin recognizes both **motions** as having the same **intent**
+and publishes a single `uheld` event for either.
 
-- click (tap)
-- long-press (long-tap)
-- drag (swipe)
-- long-press-drag (long-press-swipe)
-- zoom (pinch-to-zoom)
+Here are the full list of **intents** supported by this **unified event**
+plugin:
 
-This plugin is used in multiple commercial SPAs and is featured in the best-selling book 
-[Single Page Web Applications - JavaScript end-to-end][1], also [available on Amazon][2].
+- `utap`  - Mouse-click (mouse) / Finger tap (touch)
+- `uheld` - Long-mouse-press / Finger-press-and-hold
+- `udrag` - Mouse-click-and-drag / Finger Swipe 
+- `uhelddrag` - Long-mouse-press-and-drag / Finger-press-and-hold-and-drag
+- zoom    - Mouse-click-and-drag-Y + shift / Finger-pinch
 
-Please see the `ue-test.html` file for a demonstration of the different intents. Expected 
-behavior is expressed in the BR corner of the tiles. If you see any unexpected behavior 
-while testing motions on your device please file a bug report so I can fix it.
+This plugin is used in multiple commercial SPAs and is featured in the
+best-selling book [Single Page Web Applications - JavaScript end-to-end][1],
+also [available on Amazon][2].
 
-This plugin is designed to work with jQuery 1.7.0+, and has been tested on most jQuery 
-versions through 2.1.4.
+Please see the `ue-test.html` file for a demonstration of the different intents.
+Expected behavior is expressed in the BR corner of the tiles. If you see any
+unexpected behavior while testing motions on your device please file a bug report
+so we can fix it!
 
 ## Browser Support
-This plugin works with the latest versions of popular browsers: 
+This plugin works with jQuery 1.7.0+, and has been tested on most jQuery 
+versions through 3.0.0.  It works with the latest versions of popular browsers: 
 Chrome 15+, Firefox 23+, Safari 5+, and IE 9+. IE9 requires edge settings:
 
 ```html
@@ -80,7 +84,7 @@ See the `ue-test.html` file for example use of the
 event object.
 
 ### The click intent
-A click *intent* results in a `utap` event.
+A click **intent** results in a `utap` event.
 - The *Desktop* motion is *Left Mouse Button [LMB] down-up*
   where the mouse-down time is less than the tap tolerance and
   the location movement is less than the drag tolerance.
@@ -93,7 +97,7 @@ in the `defaultOptMap` at the top of the lib. The API will have
 a method to change these values in the future.
 
 ### The long-press intent
-A long-press *intent* results in a `uheld` event.
+A long-press **intent** results in a `uheld` event.
 - The *Desktop* motion is *Left Mouse Button [LMB] down-up*
   where the mouse-down time exceeds the long-press tolerance and
   the location movement is less than the drag tolerance.
@@ -102,30 +106,46 @@ A long-press *intent* results in a `uheld` event.
   the location movement is less than the drag tolerance.
 
 ### The drag intent
-A drag *intent* results in a single `udragstart` event, one or more
+A drag **intent** results in a single `udragstart` event, one or more
 `udragmove` events, and a final `udragend` event.
 - The *Desktop* motion is *LMB down - mouse-move - LMB up*
   where the mouse-down time exceeds the tap tolerance and 
   the location movement is greater than the drag tolerance.
 - The *Touch* is *touchstart-move-end*, where 
-  the touch time is exceeds the tap tolerance and
-  the location movement is less than the drag tolerance.
+  the touch time exceeds drag tolerance,
 
-Event order:
-- `udragstart` - fires at the start of a drag (LMB down or finger press where motion has moved out of the drag radius)
-- `udragmove`  - fires each time the mouse or finger moves
-- `udragend`   - fires at the end of a drag (LMB up or finger release)
+The event order is as follows:
+- `udragstart` - fires at the start of a drag
+- `udragmove`  - fires each time the pointer moves
+- `udragend`   - fires at the end of a drag 
+
+### The held-drag intent
+The held-drag **intent** results in a single `uheldstart` event, one or more
+`uheldmove` events, and a final `uheldend` event.
+- The *Desktop* motion is *LMB down+hold - mouse-move - LMB up*
+  where the mouse-down time exceeds the held tolerance and the 
+  mouse has stayed within the drag tolerance, after which
+  the location movement is greater than the drag tolerance.
+- The *Touch* is *touchstart+hold-move-end*, where 
+  the touch time exceeds the held tolerance and the touch as
+  stayed within the drag tolerance, after which the touch
+  location is greater than the the drag tolerance.
+
+The event order is as follows:
+- `uheldstart` - fires at the start of a held-drag
+- `uheldmove`  - fires each time the pointer moves
+- `uheldend`   - fires at the end of a held-drag
 
 ### The zoom intent
-A zoom *intent* results in a single `uzoomstart` event, one or more
+A zoom **intent** results in a single `uzoomstart` event, one or more
 `uzoommove` events, and a final `uzoomend` event.
 
 - The *Desktop* motion is *shift+LMB down - move-mouse - LMB up* where
   the mouse-down time exceeds the tap tolerance and
   the location movement is greater than the drag tolerance.
-- The *Touch* motion is *two-point-touch - point-move - two-point-release*.
+- The *Touch* motion is *two-point-touch - pinch - two-point-release*.
 
-Event order:
+The event order is as follows:
 - `uzoomstart` - fires at the start of zoom
 - `uzoommove`  - fires as zoom amount changes
 - `uzoomend`   - fires at end of zoom motion
@@ -183,10 +203,14 @@ Michael S. Mikowski (mike[dot]mikowski[at]gmail[dotcom])
 Dual licensed under the MIT or GPL Version 2
 http://jquery.org/license
 
-### Version  1.2.0-4
-- Changed default option key "ignore\_class" to "ignore\_select".
+### Version 1.3.0
+- Removed all references to `console` object
+- Changed deprecated `bind` and `unbind` to `on` and `off`
+
+### Version  1.2.0-5
+- Changed default option key `ignore_class` to `ignore_select`
 - The value is now "" instead of ":input"
-- Updated README and published to npm (1.2.4)
+- Updated README and published to npm (1.2.5)
 
 ### Version 1.1.9 
 Updated `ue-test.html` to handle zooming correctly.
