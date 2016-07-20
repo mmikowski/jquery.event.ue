@@ -20,7 +20,7 @@ plugin:
 - `uheld` - Long-mouse-press / Finger-press-and-hold
 - `udrag` - Mouse-click-and-drag / Finger Swipe 
 - `uhelddrag` - Long-mouse-press-and-drag / Finger-press-and-hold-and-drag
-- zoom    - Mouse-click-and-drag-Y + shift / Finger-pinch
+- `zoom`    - Mouse-click-and-drag-Y + shift / Finger-pinch
 
 This plugin is used in multiple commercial SPAs and is featured in the
 best-selling book [Single Page Web Applications - JavaScript end-to-end][1],
@@ -72,14 +72,6 @@ Chrome 15+, Firefox 23+, Safari 5+, and IE 9+. IE9 requires edge settings:
 ```
 
 ## Intents
-The following *intents* are supported:
-
-- click (tap)
-- long-press (long-tap)
-- drag (swipe): start, move, end
-- long-press-drag (long-press-swipe): start, move, end
-- zoom (pinch-to-zoom): start, move, end
-
 See the `ue-test.html` file for example use of the 
 event object.
 
@@ -252,7 +244,7 @@ Tested with Android 3.2 Chrome, iOS5+ Safari, Chrome 15+, Firefox 23, and IE 9+.
 The Hammer touch library, jQuery mobile.
 
 ## TODO
-Support a wider range of *intents*
+Support a wider range of **intents**
 
 ## Contribute!
 If you want to help out, like all jQuery plugins this is hosted at

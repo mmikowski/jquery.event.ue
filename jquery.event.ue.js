@@ -1,14 +1,16 @@
 /*
  * jQuery plugin for unified mouse and touch events
  *
- * Copyright (c) 2013 Michael S. Mikowski
+ * Copyright (c) 2013-2016 Michael S. Mikowski
  * (mike[dot]mikowski[at]gmail[dotcom])
  *
  * Dual licensed under the MIT or GPL Version 2
  * http://jquery.org/license
  *
  * Versions
- *  1.2.0   - ignore_class => ignore_select, now defaults to ''
+ *  1.3.x   - Removed all console references
+ *          - Change bind to on, unbind to off
+ *  1.2.x   - ignore_class => ignore_select, now defaults to ''
  *  1.1.9   - Fixed ue-test.html demo to scale properly
  *  1.1.8   - Removed prevent default from non-ue events
  *  1.1.7   - Corrected desktop zoom motion description
