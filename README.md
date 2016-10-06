@@ -195,6 +195,10 @@ Michael S. Mikowski (mike[dot]mikowski[at]gmail[dotcom])
 Dual licensed under the MIT or GPL Version 2
 http://jquery.org/license
 
+### Version 1.3.2
+Updated to ignore most input elements (input, textarea, select) by default.
+See the `ignore_select` setting.
+
 ### Version 1.3.0
 - Removed all references to `console` object
 - Changed deprecated `bind` and `unbind` to `on` and `off`
@@ -219,6 +223,11 @@ Redirected library discussion to blog post.
 The default `px_radius` parameter was doubled from 5px to 10px.  This made `utap`
 and `uheld` events work much better on smaller screens.  Confirmed compatible with
 with jQuery 2.1.4, thus 1.7.0 - 2.1.4 appear safe.
+
+### Versions 1.1.x
+**No code changes.**  Updated npm keywords. Fixed typos.
+Bumped version number to represent maturity and stability.
+Redirected library discussion to blog post.
 
 ### Versions 0.6.0
 Fixed held logic, added `px_tdelta_x` and `px_tdelta_y` to attributes.
