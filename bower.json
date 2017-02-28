@@ -1,0 +1,53 @@
+{
+  "name": "jquery.event.ue",
+  "main": "jquery.event.ue.js",
+  "homepage": "https://github.com/mmikowski/jquery.event.ue",
+  "authors": [
+    "Michael S. Mikowski <mike.mikowski@gmail.com>"
+  ],
+  "description": "Respond to Touch and Desktop events using the same handlers, including tap (click), long-press, drag, long-press-drag, pinch/mouse zoom. Used in commercial SPAs and featured in the best-selling book Single Page Web Applications - JavaScript end-to-end.",
+  "keywords": [
+    "jquery-plugin",
+    "ecosystem:jquery",
+    "jquery",
+    "plugin",
+    "jquery.event",
+    "jquery.events.ue",
+    "unified",
+    "event",
+    "unified",
+    "events",
+    "unified",
+    "event",
+    "events",
+    "desktop",
+    "and",
+    "mobile",
+    "desktop",
+    "and",
+    "touch",
+    "desktop",
+    "touch",
+    "mobile",
+    "phone",
+    "tablet",
+    "drag",
+    "zoom",
+    "tap",
+    "click"
+  ],
+  "license": "MIT",
+  "moduleType": [
+    "globals"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": ">=1.7"
+  }
+}
